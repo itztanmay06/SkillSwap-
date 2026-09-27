@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Header from "../layout/Header";
 import Icon from "../layout/Icon";
+import Avatar from "../layout/Avatar";
 
 // Yeh contact list ka sample data hai
 const contacts = [
@@ -43,7 +44,7 @@ export default function Messages() {
           <h3 style={{ padding: "14px 16px", borderBottom: "1px solid #e2e8f0", fontSize: 14 }}>Conversations</h3>
           {contacts.map((c) => (
             <div key={c.id} className="contact-item active">
-              <img src={c.avatar} alt={c.name} className="avatar-sm" />
+              <Avatar name={c.name} size="sm" />
               <div style={{ flex: 1 }}>
                 <strong>{c.name}</strong>
                 <p className="text-muted text-sm">{c.role}</p>
@@ -57,7 +58,7 @@ export default function Messages() {
         <div className="chat-pane">
           {/* Chat Header */}
           <div className="chat-header">
-            <img src={activeContact.avatar} alt={activeContact.name} className="avatar-sm" />
+            <Avatar name={activeContact.name} size="sm" />
             <div>
               <strong>{activeContact.name}</strong>
               <span className="text-muted text-sm" style={{ display: "block" }}>● Online</span>

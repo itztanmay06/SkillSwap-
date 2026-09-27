@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../layout/Header";
 import Icon from "../layout/Icon";
+import Avatar from "../layout/Avatar";
 import { useApp } from "../context";
 
 // Yeh rating breakdown ka percentage data hai
@@ -67,7 +68,7 @@ export default function Reviews() {
         ) : (
           reviews.map((rev) => (
             <div className="review-item-card" key={rev.id}>
-              <img src={rev.avatar || user.avatar} alt={rev.author} className="avatar-sm" />
+              <Avatar name={rev.author || user.name} size="sm" />
               <div style={{ flex: 1 }}>
                 <div className="review-header">
                   <strong>{rev.author}</strong>

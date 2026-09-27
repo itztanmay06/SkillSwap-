@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Header from "../layout/Header";
 import Icon from "../layout/Icon";
+import Avatar from "../layout/Avatar";
 import { useApp } from "../context";
 
 // Yeh user profile aur skills manage karne ka page component hai
@@ -43,7 +44,7 @@ export default function Profile() {
       {/* Yeh user profile summary card hai */}
       <div className="panel profile-card">
         <div className="profile-header-row">
-          <img src={user.avatar} alt={user.name} className="avatar-lg" />
+          <Avatar name={user.name} size="lg" />
           <div style={{ flex: 1 }}>
             <h2 className="profile-name">{user.name}</h2>
             <p className="profile-title">{user.title}</p>

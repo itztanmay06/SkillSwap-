@@ -1,5 +1,6 @@
 import React from 'react';
 import Icon from './Icon';
+import Avatar from './Avatar';
 import { useApp } from '../context';
 
 // Yeh top bar ka header component hai
@@ -33,13 +34,11 @@ export default function Header({ title = "Welcome back, Tanmay!", subtitle = "Le
           <span>{user.points} Points</span>
         </button>
 
-        {/* Yeh user ki profile photo hai jisse profile page khulta hai */}
-        <img
-          src={user.avatar}
-          alt={user.name}
+        {/* Yeh user ka initial alphabet avatar hai */}
+        <Avatar
+          name={user.name}
+          size="header"
           onClick={() => setActiveTab('profile')}
-          className="header-user-avatar"
-          title="View Profile"
         />
       </div>
     </header>

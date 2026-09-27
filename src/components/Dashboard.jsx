@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../layout/Header";
 import Icon from "../layout/Icon";
+import Avatar from "../layout/Avatar";
 import { useApp } from "../context";
 
 // Yeh main dashboard page component hai
@@ -85,7 +86,7 @@ export default function Dashboard() {
             ) : (
               recommended.map((skill) => (
                 <div className="skill-row" key={skill.id}>
-                  <img src={skill.user.avatar} alt={skill.user.name} className="avatar-sm" />
+                  <Avatar name={skill.user.name} size="sm" />
                   <div style={{ flex: 1 }}>
                     <h4 style={{ fontSize: 14, fontWeight: 700 }}>{skill.title}</h4>
                     <p className="text-muted" style={{ fontSize: 12 }}>{skill.user.name}</p>

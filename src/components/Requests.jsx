@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Header from "../layout/Header";
 import Icon from "../layout/Icon";
+import Avatar from "../layout/Avatar";
 import { useApp } from "../context";
 
 // Yeh exchange requests dekhne aur accept/reject karne ka page hai
@@ -35,7 +36,7 @@ export default function Requests() {
           ) : (
             received.map((req) => (
               <div className="request-card-row" key={req.id}>
-                <img src={req.avatar || "/avatars/default.jpg"} alt={req.from} className="avatar-md" />
+                <Avatar name={req.from || req.requesterName || "Peer"} size="md" />
                 <div style={{ flex: 1 }}>
                   <h4 style={{ fontSize: 14, fontWeight: 700 }}>Request for {req.skill}</h4>
                   <p className="text-muted text-sm">from <strong>{req.from}</strong> • {req.date}</p>
@@ -60,7 +61,7 @@ export default function Requests() {
           ) : (
             sent.map((req) => (
               <div className="request-card-row" key={req.id}>
-                <img src={req.avatar || "/avatars/default.jpg"} alt={req.to} className="avatar-md" />
+                <Avatar name={req.to || req.toUserName || "Peer"} size="md" />
                 <div style={{ flex: 1 }}>
                   <h4 style={{ fontSize: 14, fontWeight: 700 }}>Request for {req.skill}</h4>
                   <p className="text-muted text-sm">to <strong>{req.to}</strong> • {req.date}</p>

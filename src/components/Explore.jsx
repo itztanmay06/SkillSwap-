@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Header from "../layout/Header";
 import Icon from "../layout/Icon";
+import Avatar from "../layout/Avatar";
 import { useApp } from "../context";
 
 // Yeh explore skills page component hai
@@ -55,7 +56,7 @@ export default function Explore() {
               {/* Card Header (User Avatar aur Category) */}
               <div className="skill-card-header">
                 <div className="skill-user-info" onClick={() => setSelectedUserForProfile(skill.user)}>
-                  <img src={skill.user.avatar} alt={skill.user.name} className="avatar-sm" />
+                  <Avatar name={skill.user.name} size="sm" />
                   <div>
                     <strong>{skill.user.name}</strong>
                     <span className="text-muted text-sm">{skill.user.title}</span>

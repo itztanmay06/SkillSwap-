@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { X, AlertCircle, MessageSquare } from 'lucide-react';
+import Avatar from './Avatar';
 import { useApp } from '../context';
 
 // 1. Request Modal
@@ -36,7 +37,7 @@ export function RequestModal() {
         </div>
 
         <div className="modal-skill-summary">
-          <img src={requestModalSkill.user.avatar} alt={requestModalSkill.user.name} className="modal-skill-avatar" />
+          <Avatar name={requestModalSkill.user.name} size="md" />
           <div className="modal-skill-details">
             <h4 className="modal-skill-name">{requestModalSkill.title}</h4>
             <p className="modal-provider-name">By {requestModalSkill.user.name}</p>
@@ -129,7 +130,7 @@ export function UserProfileModal() {
         </div>
 
         <div className="user-modal-hero">
-          <img src={selectedUserForProfile.avatar} alt={selectedUserForProfile.name} className="user-modal-avatar" />
+          <Avatar name={selectedUserForProfile.name} size="lg" />
           <div className="user-modal-info">
             <h2 className="user-modal-name">{selectedUserForProfile.name}</h2>
             <p className="user-modal-role">{selectedUserForProfile.title || 'Skill Provider'}</p>
