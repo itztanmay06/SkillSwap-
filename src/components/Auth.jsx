@@ -25,7 +25,7 @@ export default function Auth() {
   };
 
   // Submit button dabane par check karna
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage("");
 
@@ -35,7 +35,27 @@ export default function Auth() {
 
     // 1. Agar LOGIN kar rahe hain
     if (isLogin) {
-      // Step A: Check karein ki email exist karta hai ya nahi
+      // Step A: Backend API se login try karein
+      try {
+        const response = await fetch("http://localhost:5000/api/auth/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: cleanEmail, password: cleanPassword })
+        });
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+          login(data.user.email, data.user.name);
+          return;
+        } else if (response.status === 400 || response.status === 404) {
+          setErrorMessage(data.message || "Invalid credentials!");
+          return;
+        }
+      } catch (err) {
+        // Backend offline ho toh local fallback chalega
+      }
+
+      // Step B: Local storage check
       const userFound = accounts.find((acc) => acc.email === cleanEmail);
 
       if (!userFound) {
@@ -43,13 +63,11 @@ export default function Auth() {
         return;
       }
 
-      // Step B: Check karein ki password match ho raha hai ya nahi
       if (userFound.password !== cleanPassword) {
         setErrorMessage("Galat password! Please sahi password enter karein.");
         return;
       }
 
-      // Step C: Sahi password hone par login karwayein
       login(userFound.email, userFound.name);
     } 
     // 2. Agar SIGN UP kar rahe hain
@@ -59,14 +77,34 @@ export default function Auth() {
         return;
       }
 
-      // Check karein ki email pehle se toh nahi hai
+      // Step A: Backend API par register try karein
+      try {
+        const response = await fetch("http://localhost:5000/api/auth/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name: name.trim(), email: cleanEmail, password: cleanPassword })
+        });
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+          alert("Account successfully ban gaya! +200 Skill Points credited.");
+          login(data.user.email, data.user.name);
+          return;
+        } else if (response.status === 400) {
+          setErrorMessage(data.message || "User already exists!");
+          return;
+        }
+      } catch (err) {
+        // Backend offline fallback
+      }
+
+      // Step B: Local fallback
       const alreadyExists = accounts.find((acc) => acc.email === cleanEmail);
       if (alreadyExists) {
         setErrorMessage("Yeh email pehle se registered hai! Please Login karein.");
         return;
       }
 
-      // Naya user banakar list me save karein
       const newAccount = {
         email: cleanEmail,
         password: cleanPassword,

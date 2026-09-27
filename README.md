@@ -1,59 +1,89 @@
-# Skill Swap - Frontend (React.js)
-> **Tagline:** "Exchange Skills, Not Money" | **Course:** 25CS022
+# 🌟 SkillSwap - Full Stack MERN Application
+> **Tagline:** "Exchange Skills, Not Money" | **Course:** 25CS022 (MERN Stack)
 
-## 🚀 How to Run the Application
+A complete MERN stack web platform where students and professionals exchange skills (e.g. Coding for Guitar, UI/UX for Spanish) using a barter-based Skill Points credit economy.
 
+---
+
+## 🚀 How to Run the Complete Project
+
+### 1. Start the Backend API Server
 ```bash
-# 1. Install dependencies
+# Navigate to the server folder
+cd server
+
+# Install dependencies (Express, Mongoose, Cors, Dotenv)
 npm install
 
-# 2. Start the local development server
+# (Optional) Seed initial skills into the database
+npm run seed
+
+# Start the backend server
+npm start
+```
+> The API server will be live at: `http://localhost:5000`
+
+### 2. Start the Frontend React App
+Open a second terminal window:
+```bash
+# In the root project directory:
+npm install
+
+# Start Vite dev server
 npm run dev
 ```
-Open your browser at `http://localhost:5173`.
+> The application will open at: `http://localhost:5173`
 
 ---
 
-## 📁 Ultra-Simple Flat Project Structure
+## 📁 Project Architecture
 
 ```
-src/
+project/
+├── server/                    # 🚀 Node.js + Express + MongoDB Backend
+│   ├── models/                # 💾 Mongoose Schemas
+│   │   ├── User.js            # User profile, wallet points & credentials
+│   │   ├── Skill.js           # Skills catalog & provider details
+│   │   ├── Request.js         # Exchange requests (Pending/Accepted/Declined)
+│   │   └── Transaction.js     # Wallet point credits & debits
+│   ├── routes/                # 🛣️ Express REST API Endpoints
+│   │   ├── authRoutes.js      # /api/auth (Register, Login, Profile)
+│   │   ├── skillRoutes.js     # /api/skills (Catalog, Search, Add Skill)
+│   │   ├── requestRoutes.js   # /api/requests (Send, Accept, Reject)
+│   │   └── walletRoutes.js    # /api/wallet (Transactions, Add Points)
+│   ├── seed.js                # Database seeder with sample skills & user
+│   ├── server.js              # Server entry point & MongoDB connection
+│   └── package.json           # Server dependencies
 │
-├── context.jsx        🧠 The Brain (State Manager): Holds points balance, requests, and LocalStorage
-├── data.js           💾 Database (Mock Data): Tanmay's profile, skills catalog, activities, reviews
-├── App.jsx           🧩 Main App Layout: Connects Header, Sidebar, Pages, and Modals
-├── App.css           🎨 Styling for all cards, buttons, and layout
-├── index.css         🔤 Global font, reset, and theme variables
-├── main.jsx          🚀 React entry point
-│
-└── components/       🖼️ All UI Screens (Flat in one folder):
-    ├── Sidebar.jsx   📌 Left navigation bar with Skill Swap logo
-    ├── Header.jsx    🔝 Top bar with greeting, search, and notifications
-    ├── Dashboard.jsx 📊 Main Dashboard (4 Metric cards, Recommended skills, Activity, Promo banner)
-    ├── Explore.jsx   🔍 Browse and search skills by category
-    ├── Requests.jsx  📋 Accept, reject, and complete skill exchanges (Auto point transfer)
-    ├── Wallet.jsx    💰 Skill Points wallet & transaction ledger
-    ├── Profile.jsx   👤 User profile, bio editor & skills wishlist
-    ├── Messages.jsx  💬 Direct messaging between partners
-    ├── Reviews.jsx   ⭐ Community rating breakdown & peer testimonials
-    ├── Settings.jsx  ⚙️ Account settings & 1-click Demo Data Reset
-    └── Modals.jsx    🪟 All pop-up dialogs (Request Skill, Offer Skill, Peer Profile)
+└── src/                       # ⚛️ React 18 + Vite Frontend
+    ├── components/            # UI Pages (Dashboard, Explore, Requests, Wallet, Profile, Auth)
+    ├── layout/                # Header, Sidebar, Modals, SVG Icons
+    ├── context.jsx            # Global state manager & API connection
+    ├── App.jsx                # Main Application Layout
+    └── main.jsx               # Entry React root
 ```
 
 ---
 
-## 💡 How Features Work (Summary)
+## 🛣️ Backend REST API Endpoints
 
-1. **Dashboard:**
-   - 4 live metric cards: **Skill Points (250)**, **Active Requests (3)**, **Completed (12)**, **Rating (4.8)**.
-   - Recommended skills with direct *Request* & *View Profile* buttons.
-   - Live activity timeline.
+| Method | Endpoint | Description |
+|---|---|---|
+| `POST` | `/api/auth/register` | Register new user (+200 welcome points) |
+| `POST` | `/api/auth/login` | Login user & verify credentials |
+| `GET` | `/api/auth/user/:email` | Get user profile and wallet points |
+| `GET` | `/api/skills` | Get all skills (supports `?category=` and `?search=`) |
+| `POST` | `/api/skills` | Add/Publish a new skill |
+| `GET` | `/api/requests` | Fetch exchange requests for logged-in user |
+| `POST` | `/api/requests` | Send a new exchange request & lock escrow points |
+| `PUT` | `/api/requests/:id/accept` | Accept request & credit points to provider |
+| `PUT` | `/api/requests/:id/reject` | Decline request & refund points |
+| `GET` | `/api/wallet/transactions/:email` | Get transaction ledger history |
+| `POST` | `/api/wallet/add-points` | Top up points in wallet |
 
-2. **Skill Exchange Workflow:**
-   - Browse any skill in **Explore** $\rightarrow$ Click **Request Exchange** $\rightarrow$ Select duration (1–4 hrs) $\rightarrow$ Points are calculated $\rightarrow$ Request is submitted.
-   - In **Requests**, incoming requests can be **Accepted**, **Declined**, or marked **Completed**.
-   - Marking a session as completed **transfers points automatically** to the provider's wallet and creates a transaction record!
+---
 
-3. **Data Persistence:**
-   - Everything uses browser `localStorage`, so any requests sent, skills added, or points earned stay saved across refreshes.
-   - Click **"Reset Demo Data"** anytime in the sidebar or settings to reset back to initial showcase state.
+## 💡 Key Features
+1. **Skill Points Economy:** No real money exchanged; users earn points by teaching and spend points to learn.
+2. **Escrow Guarantee:** Points are reserved when a request is sent, and transferred to the provider upon completion.
+3. **Resilient Data Sync:** Frontend seamlessly syncs with the Express API and MongoDB, with graceful offline fallbacks.
