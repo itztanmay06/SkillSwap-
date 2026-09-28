@@ -14,9 +14,12 @@ const defaultSkills = [
     category: 'Programming',
     description: 'Learn modern React hooks, component architecture, state management, and Vite build setups.',
     pointsPerHour: 50,
+    rating: 5.0,
+    reviewsCount: 12,
     user: {
       name: 'Tanmay Mittal',
-      avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80',
+      title: 'Full Stack MERN Developer',
+      avatar: '',
       rating: 5.0,
       location: 'Delhi, India'
     }
@@ -27,9 +30,12 @@ const defaultSkills = [
     category: 'Design',
     description: 'Master wireframing, color psychology, typography, and interactive prototyping.',
     pointsPerHour: 40,
+    rating: 4.9,
+    reviewsCount: 15,
     user: {
       name: 'Vanshika Sharma',
-      avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80',
+      title: 'UI/UX Designer',
+      avatar: '',
       rating: 4.9,
       location: 'Mumbai, India'
     }
@@ -40,9 +46,12 @@ const defaultSkills = [
     category: 'Music',
     description: 'Beginner friendly chords, strumming patterns, and rhythm training for beginners.',
     pointsPerHour: 35,
+    rating: 4.8,
+    reviewsCount: 9,
     user: {
-      name: 'Vanshika Jindal',
-      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80',
+      name: 'Rahul Verma',
+      title: 'Musician & Guitarist',
+      avatar: '',
       rating: 4.8,
       location: 'Bangalore, India'
     }
@@ -53,9 +62,12 @@ const defaultSkills = [
     category: 'Marketing',
     description: 'Keyword research, on-page optimization, content strategy, and organic growth tracking.',
     pointsPerHour: 45,
+    rating: 4.7,
+    reviewsCount: 11,
     user: {
       name: 'Ayush Kumar',
-      avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80',
+      title: 'Marketing Specialist',
+      avatar: '',
       rating: 4.7,
       location: 'Pune, India'
     }
@@ -78,9 +90,9 @@ const defaultSkills = [
   },
   {
     id: 's-6',
-    title: '24/7 Available',
+    title: 'Python & 24/7 Doubt Solving',
     category: 'Programming',
-    description: 'Call me any time for 24/7 fn',
+    description: 'Round-the-clock 24/7 live assistance for Python programming, debugging errors, and logic building.',
     pointsPerHour: 35,
     availability: '24/7 Available',
     rating: 5.0,
@@ -101,7 +113,7 @@ const defaultUser = {
   name: 'Tanmay Mittal',
   email: 'tanmay@example.com',
   title: 'Full Stack MERN Developer & Student',
-  avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80',
+  avatar: '',
   location: 'Delhi, India',
   points: 200,                  // Default login coins = 200
   activeRequests: 0,
@@ -125,7 +137,6 @@ export function AppProvider({ children }) {
       if (!parsed.email) parsed.email = 'tanmay@example.com';
       parsed.reviewCount = 0;   // Force 0 by default
       parsed.rating = 0;
-      parsed.completed = 0;     // Force 0 Completed by default
       return parsed;
     }
     return defaultUser;

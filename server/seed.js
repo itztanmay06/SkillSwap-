@@ -17,7 +17,7 @@ const sampleSkills = [
     pointsPerHour: 50,
     user: {
       name: 'Tanmay Mittal',
-      avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80',
+      avatar: '',
       rating: 5.0,
       location: 'Delhi, India'
     }
@@ -29,7 +29,7 @@ const sampleSkills = [
     pointsPerHour: 40,
     user: {
       name: 'Vanshika Sharma',
-      avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80',
+      avatar: '',
       rating: 4.9,
       location: 'Mumbai, India'
     }
@@ -40,8 +40,8 @@ const sampleSkills = [
     description: 'Beginner friendly chords, strumming patterns, and rhythm training for beginners.',
     pointsPerHour: 35,
     user: {
-      name: 'Vanshika Jindal',
-      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80',
+      name: 'Rahul Verma',
+      avatar: '',
       rating: 4.8,
       location: 'Bangalore, India'
     }
@@ -53,7 +53,7 @@ const sampleSkills = [
     pointsPerHour: 45,
     user: {
       name: 'Ayush Kumar',
-      avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80',
+      avatar: '',
       rating: 4.7,
       location: 'Pune, India'
     }
@@ -65,7 +65,7 @@ const sampleSkills = [
     pointsPerHour: 30,
     user: {
       name: 'Sofia Rodriguez',
-      avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80',
+      avatar: '',
       rating: 4.9,
       location: 'Madrid, Spain'
     }

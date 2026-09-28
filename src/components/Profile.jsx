@@ -55,8 +55,8 @@ export default function Profile() {
         {/* Yeh 5 stats ki strip hai (Points, Rating, Completed, Teaching, Learning) */}
         <div className="stats-strip">
           <div><div className="strip-val">{user.points}</div><div className="strip-label">Skill Points</div></div>
-          <div><div className="strip-val">⭐ {user.reviewCount > 0 ? (user.rating || 5.0).toFixed(1) : "0.0"}</div><div className="strip-label">Rating</div></div>
-          <div><div className="strip-val">{user.completed ?? 0}</div><div className="strip-label">Completed</div></div>
+          <div><div className="strip-val">⭐ {user.rating || "5.0"}</div><div className="strip-label">Rating</div></div>
+          <div><div className="strip-val">{user.completed}</div><div className="strip-label">Completed</div></div>
           <div><div className="strip-val">{user.skillsOffered ? user.skillsOffered.length : 0}</div><div className="strip-label">Teaching</div></div>
           <div><div className="strip-val">{user.skillsWanted ? user.skillsWanted.length : 0}</div><div className="strip-label">Learning</div></div>
         </div>
