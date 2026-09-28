@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Header from "../layout/Header";
 import Icon from "../layout/Icon";
 import Avatar from "../layout/Avatar";
+import { UserProfileModal } from "../layout/Modals";
 import { useApp } from "../context";
 
 // Yeh explore skills page component hai
@@ -98,6 +99,9 @@ export default function Explore() {
           ))}
         </div>
       )}
+
+      {/* Peer Profile Modal (Scoped exclusively inside Explore Skills) */}
+      <UserProfileModal />
     </div>
   );
 }

@@ -93,7 +93,7 @@ export default function Dashboard() {
                   </div>
                   <div style={{ textAlign: "right", display: "flex", alignItems: "center", gap: 8 }}>
                     <span className="rate-badge">{skill.pointsPerHour} pts/hr</span>
-                    <button className="btn-green-sm" onClick={() => setSelectedUserForProfile(skill.user)}>View</button>
+                    <button className="btn-green-sm" onClick={() => setActiveTab("explore")}>Explore</button>
                   </div>
                 </div>
               ))

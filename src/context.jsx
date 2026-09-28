@@ -41,7 +41,7 @@ const defaultSkills = [
     description: 'Beginner friendly chords, strumming patterns, and rhythm training for beginners.',
     pointsPerHour: 35,
     user: {
-      name: 'Rahul Verma',
+      name: 'vanshika Jindal',
       avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80',
       rating: 4.8,
       location: 'Bangalore, India'
@@ -78,9 +78,9 @@ const defaultSkills = [
   },
   {
     id: 's-6',
-    title: 'Python & 24/7 Doubt Solving',
+    title: '24/7 Available',
     category: 'Programming',
-    description: 'Round-the-clock 24/7 live assistance for Python programming, debugging errors, and logic building.',
+    description: 'Call me any time for 24/7 fn',
     pointsPerHour: 35,
     availability: '24/7 Available',
     rating: 5.0,
@@ -106,8 +106,8 @@ const defaultUser = {
   points: 200,                  // Default login coins = 200
   activeRequests: 0,
   completed: 0,
-  rating: 5.0,
-  reviewCount: 5,
+  rating: 0,
+  reviewCount: 0,               // 0 reviews by default
   skillsOffered: ['React.js & Modern Web Dev'],
   skillsWanted: ['UI/UX Design in Figma'],
   joinedDate: 'January 2026'
@@ -123,6 +123,8 @@ export function AppProvider({ children }) {
     if (saved) {
       const parsed = JSON.parse(saved);
       if (!parsed.email) parsed.email = 'tanmay@example.com';
+      parsed.reviewCount = 0;   // Force 0 by default
+      parsed.rating = 0;
       return parsed;
     }
     return defaultUser;
@@ -142,6 +144,46 @@ export function AppProvider({ children }) {
   const [reviews, setReviews] = useState([]);
   const [requestModalSkill, setRequestModalSkill] = useState(null);
   const [selectedUserForProfile, setSelectedUserForProfile] = useState(null);
+
+  // Active chat recipient for direct messaging
+  const [activeChatUser, setActiveChatUser] = useState({
+    name: 'Ananya Sharma',
+    role: 'CS Student • 24/7 Doubt Solver',
+    avatar: '',
+    online: true
+  });
+
+  // Switch to messages and initiate chat with specific peer
+  function startChatWith(peer) {
+    if (!peer) return;
+    setActiveChatUser({
+      name: peer.name,
+      role: peer.title || 'Skill Provider',
+      avatar: peer.avatar || '',
+      online: true
+    });
+    setActiveTab('messages');
+  }
+
+  // Add peer review / feedback
+  function addReview(reviewData = {}) {
+    const newRev = {
+      id: 'rev-' + Date.now(),
+      author: reviewData.author || 'Ananya Sharma',
+      rating: reviewData.rating || 5,
+      skill: reviewData.skill || 'Python & 24/7 Doubt Solving',
+      date: 'Just now',
+      comment: reviewData.comment || 'Tanmay is a fantastic peer mentor! He solved all my doubts clearly and patiently.'
+    };
+    const updated = [newRev, ...reviews];
+    setReviews(updated);
+    setUser({
+      ...user,
+      reviewCount: updated.length,
+      rating: 5.0
+    });
+    return newRev;
+  }
 
   // 1. Sync User data with LocalStorage
   useEffect(() => {
@@ -282,6 +324,11 @@ export function AppProvider({ children }) {
         setActivities,
         transactions,
         reviews,
+        setReviews,
+        addReview,
+        activeChatUser,
+        setActiveChatUser,
+        startChatWith,
         requestModalSkill,
         setRequestModalSkill,
         selectedUserForProfile,

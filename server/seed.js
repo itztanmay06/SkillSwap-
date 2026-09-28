@@ -40,7 +40,7 @@ const sampleSkills = [
     description: 'Beginner friendly chords, strumming patterns, and rhythm training for beginners.',
     pointsPerHour: 35,
     user: {
-      name: 'Rahul Verma',
+      name: 'Vanshika Jindal',
       avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80',
       rating: 4.8,
       location: 'Bangalore, India'

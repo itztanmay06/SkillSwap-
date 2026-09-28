@@ -45,9 +45,8 @@ function MainLayout() {
         {activeTab === 'messages' && <Messages />}
       </main>
 
-      {/* Yeh pop-up modals hain jo button click karne pe khulte hain */}
+      {/* Yeh exchange request pop-up modal hai */}
       <RequestModal />
-      <UserProfileModal />
     </div>
   );
 }

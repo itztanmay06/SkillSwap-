@@ -111,46 +111,103 @@ export function RequestModal() {
   );
 }
 
-// 2. User Profile Modal
+// 2. User Profile Modal (Scoped for Explore Tab)
 export function UserProfileModal() {
-  const { selectedUserForProfile, setSelectedUserForProfile, skills, setRequestModalSkill, setActiveTab } = useApp();
+  const { selectedUserForProfile, setSelectedUserForProfile, skills, setRequestModalSkill, startChatWith, activeTab } = useApp();
 
-  if (!selectedUserForProfile) return null;
+  if (!selectedUserForProfile || activeTab !== 'explore') return null;
 
-  const userSkills = skills.filter((s) => s.user.name === selectedUserForProfile.name);
+  // Find all skills offered by this peer
+  const userSkills = skills.filter(
+    (s) => s.user && s.user.name && s.user.name.toLowerCase() === selectedUserForProfile.name.toLowerCase()
+  );
+  const primarySkill = userSkills[0];
 
   return (
-    <div className="modal-backdrop">
-      <div className="modal-card modal-profile-card">
+    <div className="modal-backdrop" onClick={() => setSelectedUserForProfile(null)}>
+      <div className="modal-card modal-peer-card" onClick={(e) => e.stopPropagation()}>
+        {/* Header with Close */}
         <div className="modal-header">
-          <h3 className="modal-title">Peer Profile</h3>
-          <button onClick={() => setSelectedUserForProfile(null)} className="modal-close-btn">
+          <div>
+            <h3 className="modal-title">Peer Mentor Profile</h3>
+            <p className="modal-subtitle">SkillSwap Community Member</p>
+          </div>
+          <button onClick={() => setSelectedUserForProfile(null)} className="modal-close-btn" title="Close">
             <X size={20} />
           </button>
         </div>
 
-        <div className="user-modal-hero">
+        {/* Hero Banner with Avatar & Badges */}
+        <div className="peer-profile-hero">
           <Avatar name={selectedUserForProfile.name} size="lg" />
-          <div className="user-modal-info">
-            <h2 className="user-modal-name">{selectedUserForProfile.name}</h2>
-            <p className="user-modal-role">{selectedUserForProfile.title || 'Skill Provider'}</p>
+          <div className="peer-hero-details">
+            <h2 className="peer-hero-name">{selectedUserForProfile.name}</h2>
+            <p className="peer-hero-role">{selectedUserForProfile.title || 'Student & Skill Provider'}</p>
+            <div className="peer-badges-row">
+              <span className="peer-badge rating-badge">⭐ {selectedUserForProfile.rating || 5.0} Rating</span>
+              <span className="peer-badge">📍 {selectedUserForProfile.location || 'India'}</span>
+              {(selectedUserForProfile.availability || primarySkill?.availability) && (
+                <span className="tag-pill green" style={{ fontSize: 11, fontWeight: 700 }}>
+                  ⚡ {selectedUserForProfile.availability || primarySkill?.availability}
+                </span>
+              )}
+            </div>
           </div>
         </div>
 
-        <div className="modal-actions">
+        {/* Skills Offered Section */}
+        <div className="peer-skills-section">
+          <h4 className="peer-section-heading">Skills Offered for Swap:</h4>
+          <div className="peer-skills-list">
+            {userSkills.length > 0 ? (
+              userSkills.map((s) => (
+                <div key={s.id} className="peer-skill-item">
+                  <div style={{ flex: 1 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                      <strong style={{ fontSize: 14 }}>{s.title}</strong>
+                      <span className="tag-pill">{s.category}</span>
+                    </div>
+                    <p className="text-muted text-sm" style={{ marginTop: 4 }}>{s.description}</p>
+                  </div>
+                  <div style={{ textAlign: 'right' }}>
+                    <span className="rate-badge">{s.pointsPerHour} pts/hr</span>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <p className="text-muted text-sm">Active skills ready for barter.</p>
+            )}
+          </div>
+        </div>
+
+        {/* Action Buttons */}
+        <div className="modal-actions" style={{ marginTop: 20 }}>
           <button
             type="button"
             onClick={() => {
+              const peer = { ...selectedUserForProfile };
               setSelectedUserForProfile(null);
-              setActiveTab('messages');
+              startChatWith(peer);
             }}
-            className="btn-green"
+            className="btn-outline"
+            style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}
           >
-            <MessageSquare size={16} /> Message
+            <MessageSquare size={16} /> Message {selectedUserForProfile.name.split(' ')[0]}
           </button>
-          <button type="button" onClick={() => setSelectedUserForProfile(null)} className="btn-outline">
-            Close
-          </button>
+
+          {primarySkill && (
+            <button
+              type="button"
+              onClick={() => {
+                const s = primarySkill;
+                setSelectedUserForProfile(null);
+                setRequestModalSkill(s);
+              }}
+              className="btn-green"
+            >
+              Request Exchange
+            </button>
+          )}
         </div>
       </div>
     </div>

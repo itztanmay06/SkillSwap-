@@ -4,46 +4,93 @@ import Icon from "../layout/Icon";
 import Avatar from "../layout/Avatar";
 import { useApp } from "../context";
 
-// Yeh rating breakdown ka percentage data hai
-const ratingBreakdown = [
-  { stars: "5 Stars", percent: 100 },
-  { stars: "4 Stars", percent: 0 },
-  { stars: "3 Stars", percent: 0 },
-  { stars: "2 Stars", percent: 0 },
-  { stars: "1 Star", percent: 0 }
-];
-
-// Yeh community ratings aur reviews ka page component hai
 export default function Reviews() {
-  const { user, reviews } = useApp();
+  const { user, reviews, setReviews, setUser, addReview } = useApp();
+
+  const totalReviews = reviews.length;
+  const currentRating = totalReviews > 0 ? (user.rating || 5.0).toFixed(1) : "0.0";
+
+  // Dynamic rating breakdown based on actual reviews
+  const ratingBreakdown = [
+    { stars: "5 Stars", count: reviews.filter((r) => r.rating === 5).length },
+    { stars: "4 Stars", count: reviews.filter((r) => r.rating === 4).length },
+    { stars: "3 Stars", count: reviews.filter((r) => r.rating === 3).length },
+    { stars: "2 Stars", count: reviews.filter((r) => r.rating === 2).length },
+    { stars: "1 Star", count: reviews.filter((r) => r.rating === 1).length }
+  ];
+
+  // Calculate percentage
+  const breakdownWithPercent = ratingBreakdown.map((row) => ({
+    ...row,
+    percent: totalReviews > 0 ? Math.round((row.count / totalReviews) * 100) : 0
+  }));
+
+  // Helper to add sample peer feedback on demand
+  const handleSimulateFeedback = () => {
+    addReview({
+      author: "Ananya Sharma",
+      rating: 5,
+      skill: "Python & 24/7 Doubt Solving",
+      date: "Just now",
+      comment: "Tanmay explained React hooks and API integration with extreme patience and clarity. 10/10 peer tutor!"
+    });
+  };
+
+  // Helper to clear back to 0
+  const handleResetReviews = () => {
+    setReviews([]);
+    setUser({ ...user, reviewCount: 0, rating: 0 });
+  };
 
   return (
     <div className="page">
-      {/* Yeh top header bar hai */}
-      <Header title="Community Ratings & Reviews" subtitle="Feedback and trust ratings earned through completed skill exchanges." />
+      {/* Top Header Bar */}
+      <Header
+        title="Community Ratings & Reviews"
+        subtitle="Feedback and trust ratings earned through completed skill exchanges."
+      />
 
-      <div className="section-top">
+      <div className="section-top" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <div>
           <h2 className="section-title">Rating Summary</h2>
           <p className="section-subtitle">Based on peer reviews from your skill sessions.</p>
         </div>
+
+        {/* Action button to test peer feedback */}
+        <div style={{ display: "flex", gap: "8px" }}>
+          {totalReviews === 0 ? (
+            <button className="btn-green-sm" onClick={handleSimulateFeedback}>
+              + Receive Feedback from Peer
+            </button>
+          ) : (
+            <button className="btn-outline" style={{ fontSize: "12px", padding: "6px 10px" }} onClick={handleResetReviews}>
+              Reset Reviews to 0
+            </button>
+          )}
+        </div>
       </div>
 
-      {/* Yeh overall rating score aur star breakdown panel hai */}
+      {/* Overall rating score & breakdown panel */}
       <div className="panel reviews-panel">
         <div className="reviews-score">
-          <div className="reviews-big-number">{user.rating || "5.0"}</div>
+          <div className="reviews-big-number">{currentRating}</div>
           <div className="reviews-stars">
             {[1, 2, 3, 4, 5].map((n) => (
-              <Icon name="star" size={18} fill="#f59e0b" color="#f59e0b" key={n} />
+              <Icon
+                key={n}
+                name="star"
+                size={18}
+                fill={totalReviews > 0 ? "#f59e0b" : "none"}
+                color={totalReviews > 0 ? "#f59e0b" : "#cbd5e1"}
+              />
             ))}
           </div>
-          <div className="reviews-count">Based on {user.reviewCount || 5} completed exchanges</div>
+          <div className="reviews-count">Based on {totalReviews} completed exchanges</div>
         </div>
 
-        {/* Yeh rating progress bars hain (5 star, 4 star, etc.) */}
+        {/* Rating progress bars */}
         <div className="reviews-bars">
-          {ratingBreakdown.map((row) => (
+          {breakdownWithPercent.map((row) => (
             <div className="rating-row" key={row.stars}>
               <span className="rating-label">{row.stars}</span>
               <div className="rating-track">
@@ -55,32 +102,54 @@ export default function Reviews() {
         </div>
       </div>
 
-      {/* Yeh students ke feedback comments ki list hai */}
+      {/* Student Feedback Comments List */}
       <div className="panel" style={{ marginTop: 20 }}>
         <h3 className="section-title" style={{ marginBottom: 14 }}>Student Feedback</h3>
-        {reviews.length === 0 ? (
-          <div style={{ padding: "24px 12px", textAlign: "center", color: "#64748b" }}>
-            <p style={{ fontSize: 13, fontWeight: 600 }}>5 Verified Peer Reviews Recorded.</p>
-            <p style={{ fontSize: 11, color: "#94a3b8", marginTop: 4 }}>
-              Detailed written feedback will appear here once new peer sessions finish.
+
+        {totalReviews === 0 ? (
+          <div style={{ padding: "36px 16px", textAlign: "center", color: "#64748b" }}>
+            <div style={{ fontSize: "32px", marginBottom: "8px" }}>⭐</div>
+            <p style={{ fontSize: 15, fontWeight: 700, color: "#1e293b", margin: 0 }}>
+              0 Reviews (No Feedback Yet)
             </p>
+            <p style={{ fontSize: 13, color: "#64748b", marginTop: 6, maxWidth: "420px", margin: "6px auto 16px auto" }}>
+              Reviews are 0 by default. Once you complete a skill exchange session, the student will leave verified feedback here.
+            </p>
+            <button className="btn-green-sm" onClick={handleSimulateFeedback}>
+              View Example Feedback from Student
+            </button>
           </div>
         ) : (
-          reviews.map((rev) => (
-            <div className="review-item-card" key={rev.id}>
-              <Avatar name={rev.author || user.name} size="sm" />
-              <div style={{ flex: 1 }}>
-                <div className="review-header">
-                  <strong>{rev.author}</strong>
-                  <span className="review-date">{rev.date}</span>
+          <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+            {reviews.map((rev) => (
+              <div className="review-item-card" key={rev.id} style={{ display: "flex", gap: "14px", padding: "16px", background: "#f8fafc", borderRadius: "12px", border: "1px solid #e2e8f0" }}>
+                <Avatar name={rev.author || "Peer"} size="md" />
+                <div style={{ flex: 1 }}>
+                  <div className="review-header" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                    <div>
+                      <strong style={{ fontSize: 15, color: "#0f172a" }}>{rev.author}</strong>
+                      <div style={{ display: "flex", gap: "2px", marginTop: "3px" }}>
+                        {[1, 2, 3, 4, 5].map((s) => (
+                          <Icon key={s} name="star" size={14} fill="#f59e0b" color="#f59e0b" />
+                        ))}
+                      </div>
+                    </div>
+                    <span className="review-date" style={{ fontSize: 12, color: "#64748b" }}>{rev.date}</span>
+                  </div>
+
+                  <div style={{ marginTop: "8px" }}>
+                    <span className="tag-pill green" style={{ fontSize: 11, padding: "2px 8px", display: "inline-block" }}>
+                      Skill: {rev.skill}
+                    </span>
+                  </div>
+
+                  <p className="review-comment" style={{ fontSize: 13, color: "#334155", marginTop: "8px", lineHeight: "1.5", fontStyle: "italic" }}>
+                    "{rev.comment}"
+                  </p>
                 </div>
-                <span className="tag-pill green" style={{ fontSize: 11, padding: "2px 8px", margin: "4px 0", display: "inline-block" }}>
-                  {rev.skill}
-                </span>
-                <p className="review-comment">"{rev.comment}"</p>
               </div>
-            </div>
-          ))
+            ))}
+          </div>
         )}
       </div>
     </div>
