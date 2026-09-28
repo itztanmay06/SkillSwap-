@@ -48,8 +48,8 @@ export default function Dashboard() {
           </div>
           <div>
             <div className="stat-label">Completed</div>
-            <div className="stat-value">{user.completed}</div>
-            <div className="stat-subtext text-blue">View all →</div>
+            <div className="stat-value">{user.completed ?? 0} Completed</div>
+            <div className="stat-subtext text-blue">View history →</div>
           </div>
         </div>
 
@@ -60,8 +60,8 @@ export default function Dashboard() {
           </div>
           <div>
             <div className="stat-label">My Rating</div>
-            <div className="stat-value">{user.rating || "5.0"}</div>
-            <div className="stat-subtext text-purple">View reviews →</div>
+            <div className="stat-value">⭐ {user.reviewCount > 0 ? (user.rating || 5.0).toFixed(1) : "0.0"}</div>
+            <div className="stat-subtext text-purple">{user.reviewCount || 0} Reviews</div>
           </div>
         </div>
 

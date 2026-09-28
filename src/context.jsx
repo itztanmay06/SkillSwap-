@@ -41,7 +41,7 @@ const defaultSkills = [
     description: 'Beginner friendly chords, strumming patterns, and rhythm training for beginners.',
     pointsPerHour: 35,
     user: {
-      name: 'vanshika Jindal',
+      name: 'Vanshika Jindal',
       avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80',
       rating: 4.8,
       location: 'Bangalore, India'
@@ -125,6 +125,7 @@ export function AppProvider({ children }) {
       if (!parsed.email) parsed.email = 'tanmay@example.com';
       parsed.reviewCount = 0;   // Force 0 by default
       parsed.rating = 0;
+      parsed.completed = 0;     // Force 0 Completed by default
       return parsed;
     }
     return defaultUser;
