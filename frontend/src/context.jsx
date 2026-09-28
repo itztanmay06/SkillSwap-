@@ -122,7 +122,7 @@ const defaultUser = {
   reviewCount: 0,               // 0 reviews by default
   skillsOffered: ['React.js & Modern Web Dev'],
   skillsWanted: ['UI/UX Design in Figma'],
-  joinedDate: 'January 2026'
+  joinedDate: 'Sept 2026'
 };
 
 export function AppProvider({ children }) {
@@ -137,6 +137,9 @@ export function AppProvider({ children }) {
       if (!parsed.email) parsed.email = 'tanmay@example.com';
       parsed.reviewCount = 0;   // Force 0 by default
       parsed.rating = 0;
+      if (!parsed.joinedDate || parsed.joinedDate === 'January 2026' || parsed.joinedDate === 'September 2026') {
+        parsed.joinedDate = 'Sept 2026';
+      }
       return parsed;
     }
     return defaultUser;

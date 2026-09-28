@@ -86,7 +86,7 @@ export default function Profile() {
           <div style={{ flex: 1 }}>
             <h2 className="profile-name" style={{ margin: 0, fontSize: 22, fontWeight: 800 }}>{user.name}</h2>
             <p className="profile-title" style={{ margin: "4px 0", color: "#16a34a", fontWeight: 600 }}>{user.title}</p>
-            <p className="text-muted text-sm">📍 {user.location || "Delhi, India"} • 📅 {user.joinedDate || "January 2026"}</p>
+            <p className="text-muted text-sm">📍 {user.location || "Delhi, India"} • 📅 Joined {user.joinedDate ? (user.joinedDate.toLowerCase().startsWith("joined") ? user.joinedDate.replace(/^[Jj]oined\s*(on\s*)?/, "") : user.joinedDate) : "Sept 2026"}</p>
             {user.bio && (
               <p style={{ fontSize: 13, color: "#475569", marginTop: 8, lineHeight: 1.5, maxWidth: "600px" }}>
                 {user.bio}

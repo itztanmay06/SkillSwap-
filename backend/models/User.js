@@ -58,6 +58,10 @@ const userSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now
+  },
+  joinedDate: {
+    type: String,
+    default: 'Sept 2026'
   }
 });
 

@@ -146,6 +146,7 @@ export function UserProfileModal() {
             <div className="peer-badges-row">
               <span className="peer-badge rating-badge">⭐ {selectedUserForProfile.rating || 5.0} Rating</span>
               <span className="peer-badge">📍 {selectedUserForProfile.location || 'India'}</span>
+              <span className="peer-badge">📅 Joined Sept 2026</span>
               {(selectedUserForProfile.availability || primarySkill?.availability) && (
                 <span className="tag-pill green" style={{ fontSize: 11, fontWeight: 700 }}>
                   ⚡ {selectedUserForProfile.availability || primarySkill?.availability}

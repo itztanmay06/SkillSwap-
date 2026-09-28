@@ -108,8 +108,9 @@ async function seedDatabase() {
         password: 'password123',
         title: 'Full Stack MERN Developer & Student',
         points: 200,
-        rating: 5.0,
-        reviewCount: 5,
+        rating: 0,
+        reviewCount: 0,
+        joinedDate: 'Sept 2026',
         skillsOffered: ['React.js & Modern Web Dev'],
         skillsWanted: ['UI/UX Design in Figma']
       });
