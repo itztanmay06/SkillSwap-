@@ -5,56 +5,35 @@ A complete MERN stack web platform where students and professionals exchange ski
 
 ---
 
-## 🚀 How to Run the Complete Project
+## 🚀 How to Run the Project
 
-### Option A: Quick 1-Click Batch Files (Windows)
-Double-click:
-1. `start-backend.bat` ➔ Starts Node.js Express server on port 5000
-2. `start-frontend.bat` ➔ Starts React Vite dev server on port 5173
-
----
-
-### Option B: From the Root Directory
+### Option 1: From the Root Directory (Recommended)
 ```bash
-# Start backend
+# Terminal 1: Start backend server
 npm run backend
 
-# In a separate terminal, start frontend
+# Terminal 2: Start frontend client
 npm run frontend
 ```
 
 ---
 
-### Option C: Manual Commands in Separate Terminals
+### Option 2: Running Services Individually
 
-#### 1. Start the Backend API Server
+#### 1. Backend API Server (Node.js + Express)
 ```bash
-# Navigate to the backend folder
 cd backend
-
-# Install dependencies (if not done yet)
 npm install
-
-# (Optional) Seed initial skills into the database
-npm run seed
-
-# Start the backend server
-npm start
+npm run seed      # (Optional) Seed initial skill catalog into MongoDB
+npm start         # Runs API on http://localhost:5000
 ```
-> The API server will be live at: `http://localhost:5000`
 
-#### 2. Start the Frontend React App
+#### 2. Frontend Web Client (React 18 + Vite)
 ```bash
-# Navigate to the frontend folder
 cd frontend
-
-# Install dependencies (if not done yet)
 npm install
-
-# Start Vite dev server
-npm run dev
+npm run dev       # Runs Vite dev server on http://localhost:5173
 ```
-> The application will open at: `http://localhost:5173`
 
 ---
 
@@ -67,17 +46,16 @@ project/
 │   ├── routes/                # 🛣️ Express REST API Endpoints
 │   ├── seed.js                # Database seeder with sample skills & user
 │   ├── server.js              # Server entry point & MongoDB connection
+│   ├── .env.example           # Environment configuration template
 │   └── package.json           # Backend dependencies
 │
 ├── frontend/                  # ⚛️ React 18 + Vite Frontend
 │   ├── src/                   # React components, layout, context, App.jsx
-│   ├── public/                # Static public assets
+│   ├── public/                # Static public assets & icons
 │   ├── index.html             # HTML entry template
-│   ├── vite.config.js         # Vite configuration
+│   ├── vite.config.js         # Vite build configuration
 │   └── package.json           # Frontend dependencies
 │
-├── start-backend.bat          # ⚡ 1-click launcher for backend
-├── start-frontend.bat         # ⚡ 1-click launcher for frontend
 └── package.json               # Root convenience runner
 ```
 

@@ -4,13 +4,13 @@ import Icon from "../layout/Icon";
 import Avatar from "../layout/Avatar";
 import { useApp } from "../context";
 
-// Yeh user profile aur skills manage karne ka page component hai
+// User Profile and Skill Portfolio Component
 export default function Profile() {
   const { user, setUser } = useApp();
   const [newSkill, setNewSkill] = useState("");
   const [newWish, setNewWish] = useState("");
 
-  // Edit Profile Mode State
+  // Edit Profile Form State
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
     name: user.name || "Tanmay Mittal",
@@ -19,7 +19,7 @@ export default function Profile() {
     bio: user.bio || "Passionate about building scalable web applications and exchanging knowledge in React, Node, and DSA."
   });
 
-  // Save edited profile handler
+  // Save updated profile details
   const handleSaveProfile = (e) => {
     e.preventDefault();
     if (!formData.name.trim()) {
@@ -38,7 +38,7 @@ export default function Profile() {
     setUser(updatedUser);
     setIsEditing(false);
 
-    // Backend API par profile update call karna
+    // Persist updated profile to backend API
     fetch(`http://localhost:5000/api/auth/user/${user.email || "tanmay@example.com"}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -48,7 +48,7 @@ export default function Profile() {
     alert("Profile updated successfully!");
   };
 
-  // Yeh teaching skill add karne ka function hai
+  // Add skill to teaching portfolio
   const addOffered = (e) => {
     e.preventDefault();
     if (!newSkill.trim()) return;
@@ -56,12 +56,12 @@ export default function Profile() {
     setNewSkill("");
   };
 
-  // Yeh teaching skill delete karne ka function hai
+  // Remove skill from teaching portfolio
   const removeOffered = (skill) => {
     setUser({ ...user, skillsOffered: user.skillsOffered.filter((s) => s !== skill) });
   };
 
-  // Yeh learning wishlist skill add karne ka function hai
+  // Add skill to learning wishlist
   const addWanted = (e) => {
     e.preventDefault();
     if (!newWish.trim()) return;
@@ -69,17 +69,17 @@ export default function Profile() {
     setNewWish("");
   };
 
-  // Yeh learning wishlist skill delete karne ka function hai
+  // Remove skill from learning wishlist
   const removeWanted = (wish) => {
     setUser({ ...user, skillsWanted: user.skillsWanted.filter((w) => w !== wish) });
   };
 
   return (
     <div className="page">
-      {/* Yeh top header bar hai */}
+      {/* Page Header */}
       <Header title="My Profile" subtitle="Manage your taught skills, learning wishlist, and student reputation." />
 
-      {/* Yeh user profile summary card hai */}
+      {/* User Profile Card */}
       <div className="panel profile-card">
         <div className="profile-header-row" style={{ display: "flex", alignItems: "flex-start", gap: 16 }}>
           <Avatar name={user.name} size="lg" />
@@ -124,7 +124,7 @@ export default function Profile() {
                   type="text"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  style={{ width: "100%", padding: "9px 12px", borderRadius: 8, border: "1px solid #cbd5e1", fontSize: 13, outline: "none", boxBox: "border-box" }}
+                  style={{ width: "100%", padding: "9px 12px", borderRadius: 8, border: "1px solid #cbd5e1", fontSize: 13, outline: "none", boxSizing: "border-box" }}
                   required
                 />
               </div>
@@ -171,7 +171,7 @@ export default function Profile() {
           </form>
         )}
 
-        {/* Yeh 5 stats ki strip hai (Points, Rating, Completed, Teaching, Learning) */}
+        {/* User Stats Strip */}
         <div className="stats-strip" style={{ marginTop: isEditing ? 20 : 16 }}>
           <div><div className="strip-val">{user.points}</div><div className="strip-label">Skill Points</div></div>
           <div><div className="strip-val">⭐ {user.reviewCount > 0 ? (user.rating || 5.0).toFixed(1) : "0.0"}</div><div className="strip-label">Rating</div></div>
@@ -181,7 +181,7 @@ export default function Profile() {
         </div>
       </div>
 
-      {/* Yeh Skills Offered (jo skills aap padha sakte ho) ka section hai */}
+      {/* Skills Offered (Teaching Portfolio) */}
       <div className="panel" style={{ marginTop: 20 }}>
         <h3 className="section-title">Skills Offered (What you teach)</h3>
         {(!user.skillsOffered || user.skillsOffered.length === 0) ? (
@@ -196,7 +196,7 @@ export default function Profile() {
           </div>
         )}
 
-        {/* Yeh naya teaching skill add karne ka form hai */}
+        {/* Add Skill to Offer Form */}
         <form onSubmit={addOffered} className="add-tag-form">
           <input
             type="text"
@@ -208,7 +208,7 @@ export default function Profile() {
         </form>
       </div>
 
-      {/* Yeh Skills Wanted (jo skills aap seekhna chahte ho) ka section hai */}
+      {/* Skills Wanted (Learning Wishlist) */}
       <div className="panel" style={{ marginTop: 20 }}>
         <h3 className="section-title">Skills Wanted (What you want to learn)</h3>
         {(!user.skillsWanted || user.skillsWanted.length === 0) ? (
@@ -223,7 +223,7 @@ export default function Profile() {
           </div>
         )}
 
-        {/* Yeh naya wishlist skill add karne ka form hai */}
+        {/* Add Skill to Wishlist Form */}
         <form onSubmit={addWanted} className="add-tag-form">
           <input
             type="text"

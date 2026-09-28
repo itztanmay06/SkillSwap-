@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 
-// ==========================================
-// 💰 WALLET TRANSACTION SCHEMA (Mongoose Model)
-// ==========================================
-// Yeh schema har point transfer (credit/debit) ka record rakhta hai.
+/**
+ * Transaction Schema
+ * Represents wallet credits and debits for SkillSwap user accounts.
+ */
 
 const transactionSchema = new mongoose.Schema({
   userEmail: {

@@ -2,29 +2,28 @@ import React, { useState } from "react";
 import Icon from "../layout/Icon";
 import { useApp } from "../context";
 
-// Yeh basic aur simple login/signup component hai
+// Authentication component for Login and Registration
 export default function Auth() {
   const { login } = useApp();
   
-  // State: login ya signup tab
   const [isLogin, setIsLogin] = useState(true);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  // Default accounts list (agar pehli baar app run ho raha ho)
+  // Default accounts for offline/initial state
   const defaultAccounts = [
     { email: "tanmay@example.com", password: "123", name: "Tanmay Mittal" }
   ];
 
-  // LocalStorage se registered accounts read karna
+  // Retrieve stored accounts from localStorage
   const getAccounts = () => {
     const saved = localStorage.getItem("skillswap_accounts");
     return saved ? JSON.parse(saved) : defaultAccounts;
   };
 
-  // Submit button dabane par check karna
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage("");
@@ -33,9 +32,9 @@ export default function Auth() {
     const cleanEmail = email.trim().toLowerCase();
     const cleanPassword = password.trim();
 
-    // 1. Agar LOGIN kar rahe hain
+    // 1. Handle Login
     if (isLogin) {
-      // Step A: Backend API se login try karein
+      // Step A: Attempt backend API authentication
       try {
         const response = await fetch("http://localhost:5000/api/auth/login", {
           method: "POST",
@@ -52,32 +51,32 @@ export default function Auth() {
           return;
         }
       } catch (err) {
-        // Backend offline ho toh local fallback chalega
+        // Fallback to local storage if backend server is unreachable
       }
 
-      // Step B: Local storage check
+      // Step B: Offline local storage fallback
       const userFound = accounts.find((acc) => acc.email === cleanEmail);
 
       if (!userFound) {
-        setErrorMessage("Yeh email registered nahi hai! Please pehle Sign Up karein.");
+        setErrorMessage("This email is not registered. Please sign up first.");
         return;
       }
 
       if (userFound.password !== cleanPassword) {
-        setErrorMessage("Galat password! Please sahi password enter karein.");
+        setErrorMessage("Incorrect password. Please verify and try again.");
         return;
       }
 
       login(userFound.email, userFound.name);
     } 
-    // 2. Agar SIGN UP kar rahe hain
+    // 2. Handle Sign Up
     else {
       if (!name.trim()) {
-        setErrorMessage("Please apna naam enter karein!");
+        setErrorMessage("Please enter your full name.");
         return;
       }
 
-      // Step A: Backend API par register try karein
+      // Step A: Attempt backend registration
       try {
         const response = await fetch("http://localhost:5000/api/auth/register", {
           method: "POST",
@@ -87,7 +86,7 @@ export default function Auth() {
         const data = await response.json();
 
         if (response.ok && data.success) {
-          alert("Account successfully ban gaya! +200 Skill Points credited.");
+          alert("Account created successfully! +200 Skill Points credited.");
           login(data.user.email, data.user.name);
           return;
         } else if (response.status === 400) {
@@ -95,13 +94,13 @@ export default function Auth() {
           return;
         }
       } catch (err) {
-        // Backend offline fallback
+        // Fallback to local storage
       }
 
-      // Step B: Local fallback
+      // Step B: Offline local fallback
       const alreadyExists = accounts.find((acc) => acc.email === cleanEmail);
       if (alreadyExists) {
-        setErrorMessage("Yeh email pehle se registered hai! Please Login karein.");
+        setErrorMessage("This email is already registered. Please log in.");
         return;
       }
 
@@ -114,7 +113,7 @@ export default function Auth() {
       const updatedAccounts = [...accounts, newAccount];
       localStorage.setItem("skillswap_accounts", JSON.stringify(updatedAccounts));
 
-      alert("Account successfully ban gaya! +200 Skill Points credited.");
+      alert("Account created successfully! +200 Skill Points credited.");
       login(newAccount.email, newAccount.name);
     }
   };
@@ -122,7 +121,7 @@ export default function Auth() {
   return (
     <div className="auth-wrapper">
       <div className="auth-card">
-        {/* Website ka logo aur brand */}
+        {/* Brand Header */}
         <div className="auth-brand">
           <div className="brand-logo-icon" style={{ margin: "0 auto 12px auto" }}>
             <Icon name="logo" size={24} color="#16a34a" />
@@ -131,7 +130,7 @@ export default function Auth() {
           <p className="auth-subtitle">Exchange Skills, Not Money</p>
         </div>
 
-        {/* Login aur Signup switch tabs */}
+        {/* Auth Mode Toggle */}
         <div className="auth-tabs">
           <button
             type="button"
@@ -149,7 +148,7 @@ export default function Auth() {
           </button>
         </div>
 
-        {/* Error message box (agar galat password ya email ho) */}
+        {/* Error notification banner */}
         {errorMessage && (
           <div style={{
             backgroundColor: "#fee2e2",
@@ -166,9 +165,9 @@ export default function Auth() {
           </div>
         )}
 
-        {/* Main Form */}
+        {/* Form Container */}
         <form onSubmit={handleSubmit} className="auth-form">
-          {/* Sign Up mode me Full Name */}
+          {/* Full Name input for registration */}
           {!isLogin && (
             <div className="auth-input-group">
               <label>Full Name</label>

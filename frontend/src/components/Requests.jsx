@@ -4,21 +4,21 @@ import Icon from "../layout/Icon";
 import Avatar from "../layout/Avatar";
 import { useApp } from "../context";
 
-// Yeh exchange requests dekhne aur accept/reject karne ka page hai
+// Skill Exchange Requests Management Component
 export default function Requests() {
   const { requests, acceptRequest, rejectRequest } = useApp();
   const [tab, setTab] = useState("received");
 
-  // Received aur Sent requests ko alag alag filter kiya
+  // Separate received and sent requests
   const received = requests.filter((r) => !r.to);
   const sent = requests.filter((r) => r.to);
 
   return (
     <div className="page">
-      {/* Yeh top header bar hai */}
+      {/* Page Header */}
       <Header title="My Requests" subtitle="Manage incoming skill exchange requests and view sent applications." />
 
-      {/* Yeh Received aur Sent switch karne ke tabs hain */}
+      {/* Navigation Tabs for Received and Sent */}
       <div className="tab-nav">
         <button className={"tab-btn " + (tab === "received" ? "active" : "")} onClick={() => setTab("received")}>
           Received Requests ({received.length})
@@ -28,7 +28,7 @@ export default function Requests() {
         </button>
       </div>
 
-      {/* Yeh Received requests ka list view hai */}
+      {/* Received Requests View */}
       {tab === "received" && (
         <div className="panel">
           {received.length === 0 ? (
@@ -42,7 +42,7 @@ export default function Requests() {
                   <p className="text-muted text-sm">from <strong>{req.from}</strong> • {req.date}</p>
                   <span className="rate-badge" style={{ marginTop: 4, display: 'inline-block' }}>{req.points} pts / hr</span>
                 </div>
-                {/* Accept aur Reject buttons */}
+                {/* Action buttons */}
                 <div style={{ display: 'flex', gap: 8 }}>
                   <button className="btn-green-sm" onClick={() => acceptRequest(req.id)}>Accept</button>
                   <button className="btn-danger-sm" onClick={() => rejectRequest(req.id)}>Reject</button>
@@ -53,7 +53,7 @@ export default function Requests() {
         </div>
       )}
 
-      {/* Yeh Sent requests ka list view hai */}
+      {/* Sent Requests View */}
       {tab === "sent" && (
         <div className="panel">
           {sent.length === 0 ? (

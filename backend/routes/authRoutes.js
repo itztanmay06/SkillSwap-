@@ -2,9 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
 
-// ==========================================
 // 1. REGISTER NEW USER (POST /api/auth/register)
-// ==========================================
 router.post('/register', async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -15,7 +13,7 @@ router.post('/register', async (req, res) => {
       return res.status(400).json({ success: false, message: 'User already exists with this email!' });
     }
 
-    // Naya user banayein (Har user ko 200 welcome points milte hain)
+    // Create new user with 200 welcome points
     const newUser = new User({
       name,
       email,
@@ -35,20 +33,18 @@ router.post('/register', async (req, res) => {
   }
 });
 
-// ==========================================
 // 2. LOGIN USER (POST /api/auth/login)
-// ==========================================
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // Email se user dhoondo
+    // Find user by email
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(404).json({ success: false, message: 'User not found. Please register first!' });
     }
 
-    // Password verify karo (basic comparison)
+    // Verify credentials
     if (user.password !== password) {
       return res.status(400).json({ success: false, message: 'Invalid password!' });
     }

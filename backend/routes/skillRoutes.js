@@ -2,20 +2,18 @@ const express = require('express');
 const router = express.Router();
 const Skill = require('../models/Skill');
 
-// ==========================================
 // 1. GET ALL SKILLS (GET /api/skills)
-// ==========================================
 router.get('/', async (req, res) => {
   try {
     const { category, search } = req.query;
     let query = {};
 
-    // Filter by category agar provide kiya gaya ho
+    // Filter by category if provided
     if (category && category !== 'All') {
       query.category = category;
     }
 
-    // Search query match
+    // Keyword search in title or description
     if (search) {
       query.$or = [
         { title: { $regex: search, $options: 'i' } },
@@ -30,9 +28,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// ==========================================
 // 2. ADD NEW SKILL (POST /api/skills)
-// ==========================================
 router.post('/', async (req, res) => {
   try {
     const { title, category, description, pointsPerHour, availability, user } = req.body;
@@ -53,9 +49,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// ==========================================
 // 3. GET SINGLE SKILL (GET /api/skills/:id)
-// ==========================================
 router.get('/:id', async (req, res) => {
   try {
     const skill = await Skill.findById(req.params.id);

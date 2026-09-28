@@ -1,10 +1,9 @@
 const mongoose = require('mongoose');
 
-// ==========================================
-// 📋 EXCHANGE REQUEST SCHEMA (Mongoose Model)
-// ==========================================
-// Jab koi user kisi dusre user se skill seekhne ki request bhejta hai,
-// toh ye model us request ko store karta hai.
+/**
+ * Request Schema
+ * Represents skill exchange proposals sent between learners and providers.
+ */
 
 const requestSchema = new mongoose.Schema({
   skillTitle: {

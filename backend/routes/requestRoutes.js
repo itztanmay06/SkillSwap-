@@ -4,15 +4,13 @@ const Request = require('../models/Request');
 const User = require('../models/User');
 const Transaction = require('../models/Transaction');
 
-// ==========================================
 // 1. GET ALL REQUESTS (GET /api/requests)
-// ==========================================
 router.get('/', async (req, res) => {
   try {
     const { userName } = req.query;
     let query = {};
 
-    // Agar userName diya hai toh incoming aur outgoing dono fetch karo
+    // If userName is provided, fetch both sent and received requests
     if (userName) {
       query.$or = [
         { requesterName: userName },
@@ -27,9 +25,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// ==========================================
 // 2. CREATE NEW REQUEST (POST /api/requests)
-// ==========================================
 router.post('/', async (req, res) => {
   try {
     const { skillTitle, requesterName, toUserName, avatar, hours, points, note, userEmail } = req.body;
@@ -74,9 +70,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// ==========================================
 // 3. ACCEPT REQUEST (PUT /api/requests/:id/accept)
-// ==========================================
 router.put('/:id/accept', async (req, res) => {
   try {
     const { receiverEmail } = req.body;
@@ -113,9 +107,7 @@ router.put('/:id/accept', async (req, res) => {
   }
 });
 
-// ==========================================
 // 4. REJECT REQUEST (PUT /api/requests/:id/reject)
-// ==========================================
 router.put('/:id/reject', async (req, res) => {
   try {
     const { requesterEmail } = req.body;

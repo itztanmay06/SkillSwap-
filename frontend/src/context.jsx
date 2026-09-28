@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-// Yeh global data context create karta hai
+// Global React Application Context
 const AppContext = createContext();
 
 // Backend API URL (Express server running on port 5000)
@@ -107,7 +107,7 @@ const defaultSkills = [
   }
 ];
 
-// Yeh Tanmay Mittal ka initial user profile data hai
+// Initial fallback user profile data
 const defaultUser = {
   id: 'u1',
   name: 'Tanmay Mittal',
@@ -115,7 +115,7 @@ const defaultUser = {
   title: 'Full Stack MERN Developer & Student',
   avatar: '',
   location: 'Delhi, India',
-  points: 200,                  // Default login coins = 200
+  points: 200,                  // Initial signup points = 200
   activeRequests: 0,
   completed: 0,
   rating: 0,
@@ -126,10 +126,10 @@ const defaultUser = {
 };
 
 export function AppProvider({ children }) {
-  // Yeh check karta hai ki user logged in hai ya nahi
+  // Authentication status
   const [isLoggedIn, setIsLoggedIn] = useState(true);
 
-  // Yeh user ka main state hai jo localStorage se load aur sync hota hai
+  // User profile state synced with localStorage
   const [user, setUser] = useState(() => {
     const saved = localStorage.getItem('skillswap_user');
     if (saved) {
@@ -145,7 +145,7 @@ export function AppProvider({ children }) {
     return defaultUser;
   });
 
-  // Yeh alag-alag states hain tabs, search, aur lists ke liye
+  // Navigation, catalog, and request states
   const [activeTab, setActiveTab] = useState('dashboard');
   const [searchQuery, setSearchQuery] = useState('');
   const [skills, setSkills] = useState(defaultSkills);
@@ -219,11 +219,11 @@ export function AppProvider({ children }) {
         }
       })
       .catch(() => {
-        // Backend offline ho toh local defaultSkills automatically use hongi
+        // Fallback to default skills if backend is offline
       });
   }, []);
 
-  // Yeh login function hai jo account open karta hai
+  // Authenticate user session
   function login(email, newName) {
     if (newName) {
       setUser({ ...user, name: newName, email: email || user.email });
@@ -232,12 +232,12 @@ export function AppProvider({ children }) {
     setActiveTab('dashboard');
   }
 
-  // Yeh logout function hai jo user ko login screen par bhejta hai
+  // End user session
   function logout() {
     setIsLoggedIn(false);
   }
 
-  // Yeh function exchange request bhejta hai aur points deduct karta hai
+  // Submit skill exchange request with point escrow deduction
   function sendRequest(skill, hours, note) {
     const cost = skill.pointsPerHour * hours;
     if (user.points < cost) {
@@ -281,7 +281,7 @@ export function AppProvider({ children }) {
     return true;
   }
 
-  // Yeh function request accept karke user ko points credit karta hai
+  // Accept exchange request and credit points to provider
   function acceptRequest(requestId) {
     const req = requests.find((r) => r.id === requestId);
     if (!req) return;
@@ -304,7 +304,7 @@ export function AppProvider({ children }) {
     alert('Request accepted! +' + req.points + ' points credited.');
   }
 
-  // Yeh function request reject karta hai
+  // Reject exchange request and refund escrow points
   function rejectRequest(requestId) {
     setRequests(requests.filter((r) => r.id !== requestId));
     setUser({ ...user, activeRequests: Math.max(0, user.activeRequests - 1) });
@@ -358,7 +358,7 @@ export function AppProvider({ children }) {
   );
 }
 
-// Yeh custom hook hai context ko easy use karne ke liye
+// Custom hook for consuming application context
 export function useApp() {
   return useContext(AppContext);
 }

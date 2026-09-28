@@ -1,6 +1,6 @@
 import React from 'react';
 
-// Yeh function har naam ke liye ek consistent aur sundar gradient color deta hai
+// Computes a deterministic gradient based on user name string
 function getAvatarGradient(name = '') {
   const gradients = [
     'linear-gradient(135deg, #10b981, #059669)', // Emerald (Brand color)
@@ -23,13 +23,13 @@ function getAvatarGradient(name = '') {
   return gradients[index];
 }
 
-// 🔤 Alphabet Initial Profile Avatar Component
+// Letter initial avatar generator
 export default function Avatar({ name = 'User', size = 'sm', className = '', onClick, style = {} }) {
-  // Pehla alphabet extract karein
+  // Extract first letter
   const initial = (name ? name.trim().charAt(0) : '?').toUpperCase();
   const background = getAvatarGradient(name);
 
-  // Sizes predefined map
+  // Predefined avatar dimensions
   const sizeMap = {
     sm: { width: '34px', height: '34px', fontSize: '14px', borderRadius: '8px' },
     header: { width: '38px', height: '38px', fontSize: '16px', borderRadius: '10px' },

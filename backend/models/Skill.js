@@ -1,10 +1,9 @@
 const mongoose = require('mongoose');
 
-// ==========================================
-// 💡 SKILL SCHEMA (Mongoose Model)
-// ==========================================
-// Yeh schema platform par offer kiye jane wale skills ko store karta hai:
-// Title, Category, Description, Points Per Hour, aur Teacher/User info.
+/**
+ * Skill Schema
+ * Represents skill offerings listed by platform users.
+ */
 
 const skillSchema = new mongoose.Schema({
   title: {

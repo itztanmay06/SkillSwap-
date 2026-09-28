@@ -1,14 +1,14 @@
 import React from 'react';
 import { AppProvider, useApp } from './context';
 
-// Yeh shared layout components hain (sidebar aur popups)
+// Layout and modal components
 import Sidebar from './layout/Sidebar';
 import { RequestModal, UserProfileModal } from './layout/Modals';
 
-// Yeh login aur signup ka component hai
+// Authentication component
 import Auth from './components/Auth';
 
-// Yeh alag-alag tabs ke page components hain
+// Page view components
 import Dashboard from './components/Dashboard';
 import Explore from './components/Explore';
 import Requests from './components/Requests';
@@ -17,24 +17,23 @@ import Profile from './components/Profile';
 import Messages from './components/Messages';
 import Reviews from './components/Reviews';
 
-// Yeh puri website ki CSS styling file hai
+// Global stylesheet
 import './App.css';
 
 function MainLayout() {
-  // Yeh pata karta hai ki user logged in hai ya nahi, aur kaunsa tab open hai
   const { activeTab, isLoggedIn } = useApp();
 
-  // Agar user logged in nahi hai, toh seedha Login / Sign Up screen dikhaye
+  // If user is not authenticated, render login/signup screen
   if (!isLoggedIn) {
     return <Auth />;
   }
 
   return (
     <div className="app-container">
-      {/* Yeh left side ka navigation sidebar hai */}
+      {/* Navigation sidebar */}
       <Sidebar />
 
-      {/* Yeh main screen area hai jahan clicked tab ka page dikhta hai */}
+      {/* Main content routing container */}
       <main className="content-container">
         {activeTab === 'dashboard' && <Dashboard />}
         {activeTab === 'explore' && <Explore />}
@@ -45,13 +44,13 @@ function MainLayout() {
         {activeTab === 'messages' && <Messages />}
       </main>
 
-      {/* Yeh exchange request pop-up modal hai */}
+      {/* Skill exchange modal */}
       <RequestModal />
     </div>
   );
 }
 
-// Yeh root component hai jo poore app ko context data provide karta hai
+// Root application component with Context Provider wrapper
 export default function App() {
   return (
     <AppProvider>

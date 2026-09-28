@@ -4,17 +4,17 @@ import Icon from "../layout/Icon";
 import Avatar from "../layout/Avatar";
 import { useApp } from "../context";
 
-// Yeh main dashboard page component hai
+// Main Dashboard Overview Component
 export default function Dashboard() {
   const { user, skills, activities, setActiveTab, setSelectedUserForProfile } = useApp();
   const recommended = skills.slice(0, 3);
 
   return (
     <div className="page">
-      {/* Yeh top header bar hai */}
+      {/* Top Header */}
       <Header title={"Welcome back, " + user.name.split(" ")[0] + "!"} subtitle="Let's exchange skills and grow together." />
 
-      {/* Yeh 4 main stat cards ka grid hai */}
+      {/* Key Metric Stat Cards Grid */}
       <div className="stats-grid">
         
         {/* Card 1: Skill Points */}
@@ -67,7 +67,7 @@ export default function Dashboard() {
 
       </div>
 
-      {/* Yeh middle ka 2-column section hai (Recommended Skills aur Recent Activity) */}
+      {/* Two Column Grid: Recommendations & Activity */}
       <div className="two-col-grid">
         
         {/* Left Box: Recommended Skills */}
@@ -125,7 +125,7 @@ export default function Dashboard() {
 
       </div>
 
-      {/* Yeh bottom ka green community banner hai */}
+      {/* Community Call-to-Action Banner */}
       <div className="promo-banner">
         <div>
           <h3>Share your skills. Earn points. Learn new skills.</h3>

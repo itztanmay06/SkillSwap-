@@ -1,10 +1,9 @@
 const mongoose = require('mongoose');
 
-// ==========================================
-// 👤 USER SCHEMA (Mongoose Model)
-// ==========================================
-// Yeh schema SkillSwap ke users ki details store karta hai:
-// Name, Email, Password, Points Wallet, and Ratings.
+/**
+ * User Schema
+ * Represents user credentials, profile information, and wallet point balance.
+ */
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -37,7 +36,7 @@ const userSchema = new mongoose.Schema({
   },
   points: {
     type: Number,
-    default: 200 // Har naye user ko 200 free signup points milte hain
+    default: 200 // Initial signup bonus points
   },
   rating: {
     type: Number,
