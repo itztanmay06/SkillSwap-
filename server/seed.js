@@ -69,6 +69,19 @@ const sampleSkills = [
       rating: 4.9,
       location: 'Madrid, Spain'
     }
+  },
+  {
+    title: 'Python & 24/7 Doubt Solving',
+    category: 'Programming',
+    description: 'Round-the-clock 24/7 live assistance for Python programming, debugging errors, and logic building.',
+    pointsPerHour: 35,
+    availability: '24/7 Available',
+    user: {
+      name: 'Ananya Sharma',
+      avatar: '',
+      rating: 5.0,
+      location: 'Chandigarh, India'
+    }
   }
 ];
 

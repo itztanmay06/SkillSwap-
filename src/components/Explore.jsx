@@ -62,7 +62,14 @@ export default function Explore() {
                     <span className="text-muted text-sm">{skill.user.title}</span>
                   </div>
                 </div>
-                <span className="tag-pill">{skill.category}</span>
+                <div style={{ display: "flex", gap: "6px", alignItems: "center" }}>
+                  {skill.availability && (
+                    <span className="tag-pill green" style={{ fontSize: "11px", fontWeight: "700" }}>
+                      ⚡ {skill.availability}
+                    </span>
+                  )}
+                  <span className="tag-pill">{skill.category}</span>
+                </div>
               </div>
 
               {/* Card Title aur Description */}
@@ -73,7 +80,7 @@ export default function Explore() {
               <div className="skill-card-bottom">
                 <div className="skill-rating">
                   <Icon name="star" size={16} fill="#f59e0b" color="#f59e0b" />
-                  <span>{skill.rating} ({skill.reviewsCount})</span>
+                  <span>{skill.rating || skill.user?.rating || 4.9} ({skill.reviewsCount || 12})</span>
                 </div>
                 <span className="rate-badge">{skill.pointsPerHour} pts/hr</span>
               </div>

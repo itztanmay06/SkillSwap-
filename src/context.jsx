@@ -66,11 +66,31 @@ const defaultSkills = [
     category: 'Languages',
     description: 'Pronunciation, daily vocabulary, grammar essentials, and real conversational practice.',
     pointsPerHour: 30,
+    rating: 4.9,
+    reviewsCount: 16,
     user: {
       name: 'Sofia Rodriguez',
-      avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80',
+      title: 'Language Instructor',
+      avatar: '',
       rating: 4.9,
       location: 'Madrid, Spain'
+    }
+  },
+  {
+    id: 's-6',
+    title: 'Python & 24/7 Doubt Solving',
+    category: 'Programming',
+    description: 'Round-the-clock 24/7 live assistance for Python programming, debugging errors, and logic building.',
+    pointsPerHour: 35,
+    availability: '24/7 Available',
+    rating: 5.0,
+    reviewsCount: 24,
+    user: {
+      name: 'Ananya Sharma',
+      title: 'CS Student • 24/7 Doubt Solver',
+      avatar: '',
+      rating: 5.0,
+      location: 'Chandigarh, India'
     }
   }
 ];

@@ -27,6 +27,10 @@ const skillSchema = new mongoose.Schema({
     required: true,
     default: 50
   },
+  availability: {
+    type: String,
+    default: ''
+  },
   user: {
     name: { type: String, required: true },
     avatar: { type: String, default: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80' },

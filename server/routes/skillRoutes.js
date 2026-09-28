@@ -35,13 +35,14 @@ router.get('/', async (req, res) => {
 // ==========================================
 router.post('/', async (req, res) => {
   try {
-    const { title, category, description, pointsPerHour, user } = req.body;
+    const { title, category, description, pointsPerHour, availability, user } = req.body;
 
     const newSkill = new Skill({
       title,
       category,
       description,
       pointsPerHour,
+      availability: availability || '',
       user
     });
 
