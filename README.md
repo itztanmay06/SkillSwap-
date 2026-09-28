@@ -7,12 +7,32 @@ A complete MERN stack web platform where students and professionals exchange ski
 
 ## 🚀 How to Run the Complete Project
 
-### 1. Start the Backend API Server
-```bash
-# Navigate to the server folder
-cd server
+### Option A: Quick 1-Click Batch Files (Windows)
+Double-click:
+1. `start-backend.bat` ➔ Starts Node.js Express server on port 5000
+2. `start-frontend.bat` ➔ Starts React Vite dev server on port 5173
 
-# Install dependencies (Express, Mongoose, Cors, Dotenv)
+---
+
+### Option B: From the Root Directory
+```bash
+# Start backend
+npm run backend
+
+# In a separate terminal, start frontend
+npm run frontend
+```
+
+---
+
+### Option C: Manual Commands in Separate Terminals
+
+#### 1. Start the Backend API Server
+```bash
+# Navigate to the backend folder
+cd backend
+
+# Install dependencies (if not done yet)
 npm install
 
 # (Optional) Seed initial skills into the database
@@ -23,10 +43,12 @@ npm start
 ```
 > The API server will be live at: `http://localhost:5000`
 
-### 2. Start the Frontend React App
-Open a second terminal window:
+#### 2. Start the Frontend React App
 ```bash
-# In the root project directory:
+# Navigate to the frontend folder
+cd frontend
+
+# Install dependencies (if not done yet)
 npm install
 
 # Start Vite dev server
@@ -40,27 +62,23 @@ npm run dev
 
 ```
 project/
-├── server/                    # 🚀 Node.js + Express + MongoDB Backend
-│   ├── models/                # 💾 Mongoose Schemas
-│   │   ├── User.js            # User profile, wallet points & credentials
-│   │   ├── Skill.js           # Skills catalog & provider details
-│   │   ├── Request.js         # Exchange requests (Pending/Accepted/Declined)
-│   │   └── Transaction.js     # Wallet point credits & debits
+├── backend/                   # 🚀 Node.js + Express + MongoDB Backend
+│   ├── models/                # 💾 Mongoose Schemas (User, Skill, Request, Transaction)
 │   ├── routes/                # 🛣️ Express REST API Endpoints
-│   │   ├── authRoutes.js      # /api/auth (Register, Login, Profile)
-│   │   ├── skillRoutes.js     # /api/skills (Catalog, Search, Add Skill)
-│   │   ├── requestRoutes.js   # /api/requests (Send, Accept, Reject)
-│   │   └── walletRoutes.js    # /api/wallet (Transactions, Add Points)
 │   ├── seed.js                # Database seeder with sample skills & user
 │   ├── server.js              # Server entry point & MongoDB connection
-│   └── package.json           # Server dependencies
+│   └── package.json           # Backend dependencies
 │
-└── src/                       # ⚛️ React 18 + Vite Frontend
-    ├── components/            # UI Pages (Dashboard, Explore, Requests, Wallet, Profile, Auth)
-    ├── layout/                # Header, Sidebar, Modals, SVG Icons
-    ├── context.jsx            # Global state manager & API connection
-    ├── App.jsx                # Main Application Layout
-    └── main.jsx               # Entry React root
+├── frontend/                  # ⚛️ React 18 + Vite Frontend
+│   ├── src/                   # React components, layout, context, App.jsx
+│   ├── public/                # Static public assets
+│   ├── index.html             # HTML entry template
+│   ├── vite.config.js         # Vite configuration
+│   └── package.json           # Frontend dependencies
+│
+├── start-backend.bat          # ⚡ 1-click launcher for backend
+├── start-frontend.bat         # ⚡ 1-click launcher for frontend
+└── package.json               # Root convenience runner
 ```
 
 ---
