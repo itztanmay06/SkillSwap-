@@ -8,6 +8,8 @@ export default function Auth() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [skillTitle, setSkillTitle] = useState("");
+  const [category, setCategory] = useState("Programming");
   const [errorMessage, setErrorMessage] = useState("");
 
   const defaultAccounts = [{ email: "tanmay@example.com", password: "123", name: "Tanmay Mittal" }];
@@ -18,11 +20,15 @@ export default function Auth() {
     setErrorMessage("");
     const cleanEmail = email.trim().toLowerCase();
     const cleanPass = password.trim();
+    const cleanSkill = skillTitle.trim() || "Web Development & Coding";
 
-    // 1. Try Backend API first
+    // 1. Backend API Call
     try {
       const endpoint = isLogin ? "/api/auth/login" : "/api/auth/register";
-      const payload = isLogin ? { email: cleanEmail, password: cleanPass } : { name: name.trim(), email: cleanEmail, password: cleanPass };
+      const payload = isLogin
+        ? { email: cleanEmail, password: cleanPass }
+        : { name: name.trim(), email: cleanEmail, password: cleanPass, skillTitle: cleanSkill, category };
+
       const res = await fetch(`http://localhost:5000${endpoint}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -30,8 +36,8 @@ export default function Auth() {
       });
       const data = await res.json();
       if (res.ok && data.success) {
-        if (!isLogin) alert("Account created! +200 Skill Points credited.");
-        return login(data.user.email, data.user.name);
+        if (!isLogin) alert(`Account created! Your skill "${cleanSkill}" is now live on Explore Skills.`);
+        return login(data.user.email, data.user.name, data.skill);
       }
       if (data.message) return setErrorMessage(data.message);
     } catch (err) {}
@@ -47,8 +53,20 @@ export default function Auth() {
       if (accounts.some((a) => a.email === cleanEmail)) return setErrorMessage("Email already registered. Please log in.");
       const newAcc = { email: cleanEmail, password: cleanPass, name: name.trim() };
       localStorage.setItem("skillswap_accounts", JSON.stringify([...accounts, newAcc]));
-      alert("Account created! +200 Skill Points credited.");
-      login(newAcc.email, newAcc.name);
+
+      const localSkillCard = {
+        id: "s-" + Date.now(),
+        title: cleanSkill,
+        category,
+        description: `Learn ${cleanSkill} with ${name.trim()}. One-on-one peer learning session.`,
+        pointsPerHour: 40,
+        rating: 5.0,
+        reviewsCount: 1,
+        user: { name: name.trim(), title: `${name.trim()} • Skill Explorer`, location: "India", rating: 5.0 }
+      };
+
+      alert(`Account created! Your skill "${cleanSkill}" is live on Explore Skills.`);
+      login(newAcc.email, newAcc.name, localSkillCard);
     }
   };
 
@@ -80,10 +98,29 @@ export default function Auth() {
 
         <form onSubmit={handleSubmit} className="auth-form">
           {!isLogin && (
-            <div className="auth-input-group">
-              <label>Full Name</label>
-              <input type="text" placeholder="e.g. Tanmay Mittal" value={name} onChange={(e) => setName(e.target.value)} required={!isLogin} />
-            </div>
+            <>
+              <div className="auth-input-group">
+                <label>Full Name</label>
+                <input type="text" placeholder="e.g. Rahul Sharma" value={name} onChange={(e) => setName(e.target.value)} required={!isLogin} />
+              </div>
+
+              <div className="auth-input-group">
+                <label>Skill You Can Teach / Share</label>
+                <input type="text" placeholder="e.g. Python Programming, Graphic Design" value={skillTitle} onChange={(e) => setSkillTitle(e.target.value)} required={!isLogin} />
+              </div>
+
+              <div className="auth-input-group">
+                <label>Skill Category</label>
+                <select value={category} onChange={(e) => setCategory(e.target.value)} style={{ width: "100%", padding: "10px", borderRadius: 8, border: "1px solid #cbd5e1", fontSize: 13, background: "#fff" }}>
+                  <option value="Programming">Programming</option>
+                  <option value="Design">Design</option>
+                  <option value="Music">Music</option>
+                  <option value="Marketing">Marketing</option>
+                  <option value="Languages">Languages</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+            </>
           )}
 
           <div className="auth-input-group">
@@ -97,7 +134,7 @@ export default function Auth() {
           </div>
 
           <button type="submit" className="btn-green" style={{ width: "100%", marginTop: 8, padding: 12 }}>
-            {isLogin ? "Login to Account" : "Create Account (+200 Coins)"}
+            {isLogin ? "Login to Account" : "Create Account & Publish Skill"}
           </button>
         </form>
 

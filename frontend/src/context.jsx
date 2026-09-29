@@ -71,13 +71,45 @@ export function AppProvider({ children }) {
       .catch(() => {});
   }, []);
 
-  const login = (email, newName) => {
-    if (newName) setUser({ ...user, name: newName, email: email || user.email });
+  const login = (email, newName, initialSkill) => {
+    if (newName) setUser((prev) => ({ ...prev, name: newName, email: email || prev.email }));
+    if (initialSkill) {
+      setSkills((prev) => [initialSkill, ...prev.filter((s) => s.id !== initialSkill.id)]);
+      setActiveTab('explore');
+    } else {
+      setActiveTab('dashboard');
+    }
     setIsLoggedIn(true);
-    setActiveTab('dashboard');
   };
 
   const logout = () => setIsLoggedIn(false);
+
+  // Add skill card and sync with backend
+  const addSkill = (newSkillData) => {
+    const card = {
+      id: newSkillData.id || 's-' + Date.now(),
+      title: newSkillData.title,
+      category: newSkillData.category || 'Programming',
+      description: newSkillData.description || `Learn ${newSkillData.title} with ${user.name}.`,
+      pointsPerHour: newSkillData.pointsPerHour || 40,
+      rating: 5.0,
+      reviewsCount: 1,
+      user: {
+        name: user.name,
+        title: user.title || 'Skill Explorer',
+        avatar: user.avatar || '',
+        rating: 5.0,
+        location: user.location || 'India'
+      }
+    };
+    setSkills((prev) => [card, ...prev.filter((s) => s.id !== card.id)]);
+    fetch(`${API_URL}/skills`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(card)
+    }).catch(() => {});
+    return card;
+  };
 
   const startChatWith = (peer) => {
     if (!peer) return;
@@ -156,7 +188,7 @@ export function AppProvider({ children }) {
     <AppContext.Provider
       value={{
         isLoggedIn, login, logout, user, setUser, activeTab, setActiveTab,
-        searchQuery, setSearchQuery, skills, setSkills, requests, setRequests,
+        searchQuery, setSearchQuery, skills, setSkills, addSkill, requests, setRequests,
         activities, setActivities, transactions, reviews, setReviews, addReview,
         activeChatUser, setActiveChatUser, startChatWith, requestModalSkill,
         setRequestModalSkill, selectedUserForProfile, setSelectedUserForProfile,

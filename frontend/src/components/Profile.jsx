@@ -6,7 +6,7 @@ import { useApp } from "../context";
 const inputStyle = { width: "100%", padding: "8px 12px", borderRadius: 8, border: "1px solid #cbd5e1", fontSize: 13, outline: "none", boxSizing: "border-box" };
 
 export default function Profile() {
-  const { user, setUser } = useApp();
+  const { user, setUser, addSkill } = useApp();
   const [newSkill, setNewSkill] = useState("");
   const [newWish, setNewWish] = useState("");
   const [isEditing, setIsEditing] = useState(false);
@@ -35,8 +35,11 @@ export default function Profile() {
   const addOffered = (e) => {
     e.preventDefault();
     if (!newSkill.trim()) return;
-    setUser({ ...user, skillsOffered: [...user.skillsOffered, newSkill.trim()] });
+    const skillName = newSkill.trim();
+    setUser({ ...user, skillsOffered: [...user.skillsOffered, skillName] });
+    if (addSkill) addSkill({ title: skillName, category: "Programming" });
     setNewSkill("");
+    alert(`"${skillName}" published! A new card is now live on Explore Skills.`);
   };
 
   const removeOffered = (s) => setUser({ ...user, skillsOffered: user.skillsOffered.filter((x) => x !== s) });

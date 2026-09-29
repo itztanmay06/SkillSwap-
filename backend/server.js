@@ -34,20 +34,11 @@ app.get('/', (req, res) => {
   });
 });
 
-// Database connection & server start
-console.log('Connecting to database...');
+const { connectDB } = require('./db');
 
-mongoose.connect(MONGO_URI, { serverSelectionTimeoutMS: 2500 })
-  .then(() => {
-    console.log('Connected to MongoDB successfully!');
-    app.listen(PORT, () => {
-      console.log(`SkillSwap Server is listening on http://localhost:${PORT}`);
-    });
-  })
-  .catch((err) => {
-    console.warn('MongoDB connection note:', err.message);
-    console.warn('To connect MongoDB Atlas, set your MONGO_URI string inside backend/.env');
-    app.listen(PORT, () => {
-      console.log(`SkillSwap Server is listening on http://localhost:${PORT}`);
-    });
+// Connect Database & Start Server
+connectDB().finally(() => {
+  app.listen(PORT, () => {
+    console.log(`SkillSwap Server is running on http://localhost:${PORT}`);
   });
+});
