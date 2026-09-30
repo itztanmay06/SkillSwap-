@@ -24,7 +24,6 @@ npm run frontend
 ```bash
 cd backend
 npm install
-npm run seed      # (Optional) Seed initial skill catalog into MongoDB
 npm start         # Runs API on http://localhost:5000
 ```
 
@@ -44,9 +43,10 @@ project/
 ├── backend/                   # 🚀 Node.js + Express + MongoDB Backend
 │   ├── models/                # 💾 Mongoose Schemas (User, Skill, Request, Transaction)
 │   ├── routes/                # 🛣️ Express REST API Endpoints
-│   ├── seed.js                # Database seeder with sample skills & user
-│   ├── server.js              # Server entry point & MongoDB connection
-│   ├── .env.example           # Environment configuration template
+│   ├── db.js                  # Database connection manager & data handler
+│   ├── db.json                # Local JSON database storage
+│   ├── server.js              # Server entry point & Express HTTP listener
+│   ├── .env                   # Environment configuration (PORT, MONGO_URI)
 │   └── package.json           # Backend dependencies
 │
 ├── frontend/                  # ⚛️ React 18 + Vite Frontend

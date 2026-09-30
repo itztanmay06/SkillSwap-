@@ -5,12 +5,11 @@ const API_URL = 'http://localhost:5000/api';
 
 // Initial fallback skills catalog
 const defaultSkills = [
-  { id: 's-1', title: 'React.js & Modern Web Dev', category: 'Programming', description: 'Learn modern React hooks, state management, and Vite build setups.', pointsPerHour: 50, rating: 5.0, reviewsCount: 12, user: { name: 'Tanmay Mittal', title: 'Full Stack MERN Developer', location: 'Delhi, India' } },
-  { id: 's-2', title: 'UI/UX Design in Figma', category: 'Design', description: 'Master wireframing, color psychology, typography, and interactive prototyping.', pointsPerHour: 40, rating: 4.9, reviewsCount: 15, user: { name: 'Vanshika Sharma', title: 'UI/UX Designer', location: 'Mumbai, India' } },
-  { id: 's-3', title: 'Acoustic Guitar Basics', category: 'Music', description: 'Beginner chords, strumming patterns, and rhythm training.', pointsPerHour: 35, rating: 4.8, reviewsCount: 9, user: { name: 'Rahul Verma', title: 'Musician & Guitarist', location: 'Bangalore, India' } },
-  { id: 's-4', title: 'SEO & Growth Marketing', category: 'Marketing', description: 'Keyword research, on-page optimization, and organic growth tracking.', pointsPerHour: 45, rating: 4.7, reviewsCount: 11, user: { name: 'Ayush Kumar', title: 'Marketing Specialist', location: 'Pune, India' } },
-  { id: 's-5', title: 'Conversational Spanish', category: 'Languages', description: 'Pronunciation, daily vocabulary, and real conversational practice.', pointsPerHour: 30, rating: 4.9, reviewsCount: 16, user: { name: 'Sofia Rodriguez', title: 'Language Instructor', location: 'Madrid, Spain' } },
-  { id: 's-6', title: 'Python & 24/7 Doubt Solving', category: 'Programming', description: 'Round-the-clock 24/7 live assistance for Python programming and debugging.', pointsPerHour: 35, availability: '24/7 Available', rating: 5.0, reviewsCount: 24, user: { name: 'Ananya Sharma', title: 'CS Student • 24/7 Doubt Solver', location: 'Chandigarh, India' } }
+  { id: 's-1', title: 'React.js & Modern Web Dev', category: 'Programming', description: 'Learn modern React hooks, state management, and Vite build setups.', pointsPerHour: 50, rating: 5.0, reviewsCount: 12, user: { name: 'Tanmay Mittal', location: 'Delhi, India' } },
+  { id: 's-2', title: 'UI/UX Design in Figma', category: 'Design', description: 'Master wireframing, color psychology, typography, and interactive prototyping.', pointsPerHour: 40, rating: 4.9, reviewsCount: 15, user: { name: 'Vanshika Sharma', location: 'Mumbai, India' } },
+  { id: 's-3', title: 'Acoustic Guitar Basics', category: 'Music', description: 'Beginner chords, strumming patterns, and rhythm training.', pointsPerHour: 35, rating: 4.8, reviewsCount: 9, user: { name: 'Vanshika Jindal', location: 'Bangalore, India' } },
+  { id: 's-4', title: 'SEO & Growth Marketing', category: 'Marketing', description: 'Keyword research, on-page optimization, and organic growth tracking.', pointsPerHour: 45, rating: 4.7, reviewsCount: 11, user: { name: 'Ayush Kumar', location: 'Pune, India' } },
+  { id: 's-5', title: 'Conversational Spanish', category: 'Languages', description: 'Pronunciation, daily vocabulary, and real conversational practice.', pointsPerHour: 30, rating: 4.9, reviewsCount: 16, user: { name: 'Sofia Rodriguez', location: 'Madrid, Spain' } }
 ];
 
 // Initial default user profile
@@ -51,7 +50,7 @@ export function AppProvider({ children }) {
   const [requestModalSkill, setRequestModalSkill] = useState(null);
   const [selectedUserForProfile, setSelectedUserForProfile] = useState(null);
   const [activeChatUser, setActiveChatUser] = useState({
-    name: 'Ananya Sharma', role: 'CS Student • 24/7 Doubt Solver', avatar: '', online: true
+    name: 'Vanshika Sharma', role: 'UI/UX Designer', avatar: '', online: true
   });
 
   // Sync user state with localStorage
@@ -120,9 +119,9 @@ export function AppProvider({ children }) {
   const addReview = (reviewData = {}) => {
     const newRev = {
       id: 'rev-' + Date.now(),
-      author: reviewData.author || 'Ananya Sharma',
+      author: reviewData.author || 'Vanshika Sharma',
       rating: reviewData.rating || 5,
-      skill: reviewData.skill || 'Python & 24/7 Doubt Solving',
+      skill: reviewData.skill || 'UI/UX Design in Figma',
       date: 'Just now',
       comment: reviewData.comment || 'Tanmay is a fantastic peer mentor! He solved all my doubts clearly and patiently.'
     };

@@ -7,13 +7,6 @@ import { useApp } from "../context";
 // Initial peer contacts
 const initialContacts = [
   {
-    id: "c-ananya",
-    name: "Ananya Sharma",
-    role: "CS Student • 24/7 Doubt Solver",
-    online: true,
-    initialMessage: "Hi Tanmay! I am 24/7 available for any Python or coding doubts. What are you working on?"
-  },
-  {
     id: "c-vanshika",
     name: "Vanshika Sharma",
     role: "UI/UX Designer",
@@ -21,8 +14,8 @@ const initialContacts = [
     initialMessage: "Hey Tanmay! I saw your React skills. Would love to swap some Figma design tips for frontend hooks."
   },
   {
-    id: "c-rahul",
-    name: "Rahul Verma",
+    id: "c-vanshika-jindal",
+    name: "Vanshika Jindal",
     role: "Acoustic Guitar Basics",
     online: false,
     initialMessage: "Hey! Ready for the weekend guitar strumming session?"
@@ -43,13 +36,10 @@ export default function Messages() {
 
   // Chat threads per contact ID
   const [threads, setThreads] = useState({
-    "c-ananya": [
-      { id: 1, sender: "them", text: "Hi Tanmay! I am 24/7 available for Python & coding doubts. Feel free to ask anything!", time: "10:30 AM" }
-    ],
     "c-vanshika": [
       { id: 2, sender: "them", text: "Hey! Let's swap Figma design principles for React state tips.", time: "Yesterday" }
     ],
-    "c-rahul": [
+    "c-vanshika-jindal": [
       { id: 3, sender: "them", text: "Hey Tanmay, ready for the weekend acoustic guitar lesson?", time: "Monday" }
     ],
     "c-ayush": [

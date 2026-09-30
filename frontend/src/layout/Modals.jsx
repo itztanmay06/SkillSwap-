@@ -94,7 +94,6 @@ export function UserProfileModal() {
           <Avatar name={selectedUserForProfile.name} size="lg" />
           <div className="peer-hero-details">
             <h2 className="peer-hero-name">{selectedUserForProfile.name}</h2>
-            <p className="peer-hero-role">{selectedUserForProfile.title || 'Student & Skill Provider'}</p>
             <div className="peer-badges-row">
               <span className="peer-badge rating-badge">⭐ {selectedUserForProfile.rating || 5.0} Rating</span>
               <span className="peer-badge">📍 {selectedUserForProfile.location || 'India'}</span>

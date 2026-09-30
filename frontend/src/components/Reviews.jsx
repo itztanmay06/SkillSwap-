@@ -28,9 +28,9 @@ export default function Reviews() {
   // Helper to add sample peer feedback on demand
   const handleSimulateFeedback = () => {
     addReview({
-      author: "Ananya Sharma",
+      author: "Vanshika Sharma",
       rating: 5,
-      skill: "Python & 24/7 Doubt Solving",
+      skill: "UI/UX Design in Figma",
       date: "Just now",
       comment: "Tanmay explained React hooks and API integration with extreme patience and clarity. 10/10 peer tutor!"
     });

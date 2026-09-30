@@ -60,7 +60,6 @@ export default function Explore() {
                   <Avatar name={skill.user.name} size="sm" />
                   <div>
                     <strong>{skill.user.name}</strong>
-                    <span className="text-muted text-sm">{skill.user.title}</span>
                   </div>
                 </div>
                 <div style={{ display: "flex", gap: "6px", alignItems: "center" }}>

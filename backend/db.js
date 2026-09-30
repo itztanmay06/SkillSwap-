@@ -31,7 +31,7 @@ const initialData = {
       pointsPerHour: 50,
       rating: 5.0,
       reviewsCount: 12,
-      user: { name: 'Tanmay Mittal', title: 'Full Stack MERN Developer', location: 'Delhi, India' }
+      user: { name: 'Tanmay Mittal', location: 'Delhi, India' }
     },
     {
       id: 's-2',
@@ -41,7 +41,7 @@ const initialData = {
       pointsPerHour: 40,
       rating: 4.9,
       reviewsCount: 15,
-      user: { name: 'Vanshika Sharma', title: 'UI/UX Designer', location: 'Mumbai, India' }
+      user: { name: 'Vanshika Sharma', location: 'Mumbai, India' }
     },
     {
       id: 's-3',
@@ -51,7 +51,7 @@ const initialData = {
       pointsPerHour: 35,
       rating: 4.8,
       reviewsCount: 9,
-      user: { name: 'Rahul Verma', title: 'Musician & Guitarist', location: 'Bangalore, India' }
+      user: { name: 'Vanshika Jindal', location: 'Bangalore, India' }
     },
     {
       id: 's-4',
@@ -61,7 +61,7 @@ const initialData = {
       pointsPerHour: 45,
       rating: 4.7,
       reviewsCount: 11,
-      user: { name: 'Ayush Kumar', title: 'Marketing Specialist', location: 'Pune, India' }
+      user: { name: 'Ayush Kumar', location: 'Pune, India' }
     },
     {
       id: 's-5',
@@ -71,18 +71,7 @@ const initialData = {
       pointsPerHour: 30,
       rating: 4.9,
       reviewsCount: 16,
-      user: { name: 'Sofia Rodriguez', title: 'Language Instructor', location: 'Madrid, Spain' }
-    },
-    {
-      id: 's-6',
-      title: 'Python & 24/7 Doubt Solving',
-      category: 'Programming',
-      description: 'Round-the-clock 24/7 live assistance for Python programming, debugging errors, and logic building.',
-      pointsPerHour: 35,
-      availability: '24/7 Available',
-      rating: 5.0,
-      reviewsCount: 24,
-      user: { name: 'Ananya Sharma', title: 'CS Student • 24/7 Doubt Solver', location: 'Chandigarh, India' }
+      user: { name: 'Sofia Rodriguez', location: 'Madrid, Spain' }
     }
   ],
   requests: []
