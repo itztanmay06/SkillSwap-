@@ -1,17 +1,17 @@
 import React from 'react';
 
-// Computes a deterministic gradient based on user name string
+// Get avatar background color based on name
 function getAvatarGradient(name = '') {
   const trimmed = name.trim();
-  // Ensure Tanmay, Vanshika Sharma, and Vanshika Jindal each have a distinctly different color
+  // Assign avatar colors for team members
   if (trimmed === 'Vanshika Jindal') {
-    return 'linear-gradient(135deg, #ec4899, #be185d)'; // Vibrant Rose / Pink
+    return 'linear-gradient(135deg, #ec4899, #be185d)';
   }
   if (trimmed === 'Vanshika Sharma') {
-    return 'linear-gradient(135deg, #6366f1, #4f46e5)'; // Indigo
+    return 'linear-gradient(135deg, #6366f1, #4f46e5)';
   }
   if (trimmed === 'Tanmay' || trimmed === 'Tanmay Mittal') {
-    return 'linear-gradient(135deg, #10b981, #059669)'; // Emerald Green (Brand)
+    return 'linear-gradient(135deg, #10b981, #059669)';
   }
 
   const gradients = [

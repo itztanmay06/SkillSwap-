@@ -12,7 +12,7 @@ export default function Explore() {
 
   const categories = ["All", "Design", "Music", "Marketing", "Programming", "Languages"];
 
-  // Filter skills by selected category and search keyword (excluding Sofia Rodriguez and Tanmay Mittal)
+  // Filter skills by selected category and search keyword
   const filtered = skills
     .filter((s) => s.user?.name !== 'Sofia Rodriguez' && s.user?.name !== 'Tanmay Mittal' && s.title !== 'React.js & Modern Web Dev')
     .filter((s) => {

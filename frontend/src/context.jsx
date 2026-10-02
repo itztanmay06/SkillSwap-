@@ -28,7 +28,7 @@ export function AppProvider({ children }) {
       if (!parsed.email) parsed.email = 'tanmay@example.com';
       parsed.reviewCount = 0;
       parsed.rating = 0;
-      // Ensure points default to 200 (resets stale cached 160 or undefined)
+      // Default points balance
       if (parsed.points === undefined || parsed.points === null || parsed.points === 160) parsed.points = 200;
       if (parsed.activeRequests === undefined || parsed.activeRequests === null) parsed.activeRequests = 0;
       if (parsed.completed === undefined || parsed.completed === null) parsed.completed = 0;
@@ -87,7 +87,7 @@ export function AppProvider({ children }) {
     localStorage.setItem('skillswap_requests', JSON.stringify(requests));
   }, [requests]);
 
-  // Fetch live skills from backend API (filter out Sofia Rodriguez and Tanmay Mittal)
+  // Fetch live skills from backend API
   useEffect(() => {
     fetch(`${API_URL}/skills`)
       .then((res) => res.json())
