@@ -4,7 +4,6 @@ import Icon from "../layout/Icon";
 import Avatar from "../layout/Avatar";
 import { useApp } from "../context";
 
-// Initial peer contacts
 const initialContacts = [
   {
     id: "c-vanshika",
@@ -34,7 +33,6 @@ export default function Messages() {
   const [contacts, setContacts] = useState(initialContacts);
   const [activeId, setActiveId] = useState(initialContacts[0].id);
 
-  // Chat threads per contact ID
   const [threads, setThreads] = useState({
     "c-vanshika": [
       { id: 2, sender: "them", text: "Hey! Let's swap Figma design principles for React state tips.", time: "Yesterday" }
@@ -49,15 +47,14 @@ export default function Messages() {
 
   const [text, setText] = useState("");
 
-  // Sync when activeChatUser is changed from outside (e.g. clicking Message on peer profile)
   useEffect(() => {
     if (activeChatUser && activeChatUser.name) {
-      // Check if contact already exists
+
       const existing = contacts.find((c) => c.name.toLowerCase() === activeChatUser.name.toLowerCase());
       if (existing) {
         setActiveId(existing.id);
       } else {
-        // Add new contact to list
+
         const newContact = {
           id: "c-" + Date.now(),
           name: activeChatUser.name,
@@ -79,7 +76,6 @@ export default function Messages() {
   const activeContact = contacts.find((c) => c.id === activeId) || contacts[0];
   const currentMessages = threads[activeContact.id] || [];
 
-  // Send message handler
   const handleSend = (e) => {
     e.preventDefault();
     if (!text.trim()) return;
@@ -98,7 +94,6 @@ export default function Messages() {
     }));
     setText("");
 
-    // Realistic auto-reply from peer after 900ms
     setTimeout(() => {
       const replyMsg = {
         id: Date.now() + 1,
@@ -115,11 +110,11 @@ export default function Messages() {
 
   return (
     <div className="page">
-      {/* Top Header Bar */}
+      {}
       <Header title="Messages" subtitle="Chat and coordinate skill barter sessions with peers in real-time." />
 
       <div className="messages-layout">
-        {/* Left: Conversations List */}
+        {}
         <div className="contacts-list">
           <h3 style={{ padding: "14px 16px", borderBottom: "1px solid #e2e8f0", fontSize: 14 }}>Conversations</h3>
           {contacts.map((c) => (
@@ -145,9 +140,9 @@ export default function Messages() {
           ))}
         </div>
 
-        {/* Right: Active Chat Conversation Pane */}
+        {}
         <div className="chat-pane">
-          {/* Chat Header showing that specific profile */}
+          {}
           <div className="chat-header">
             <Avatar name={activeContact.name} size="sm" />
             <div style={{ flex: 1 }}>
@@ -158,7 +153,7 @@ export default function Messages() {
             </div>
           </div>
 
-          {/* Chat Messages Body */}
+          {}
           <div className="chat-body">
             {currentMessages.map((m) => (
               <div key={m.id} className={"chat-bubble " + (m.sender === "me" ? "me" : "them")}>
@@ -168,7 +163,7 @@ export default function Messages() {
             ))}
           </div>
 
-          {/* Chat Input Box */}
+          {}
           <form onSubmit={handleSend} className="chat-footer">
             <input
               type="text"

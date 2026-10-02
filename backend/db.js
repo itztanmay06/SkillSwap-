@@ -5,7 +5,6 @@ const path = require('path');
 const DB_FILE = path.join(__dirname, 'db.json');
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/skillswap';
 
-// Initial fallback dataset
 const initialData = {
   users: [
     {
@@ -57,12 +56,10 @@ const initialData = {
   requests: []
 };
 
-// Create db.json if it doesn't exist
 if (!fs.existsSync(DB_FILE)) {
   fs.writeFileSync(DB_FILE, JSON.stringify(initialData, null, 2));
 }
 
-// Read database
 const getFileDB = () => {
   try {
     return JSON.parse(fs.readFileSync(DB_FILE, 'utf8'));
@@ -71,7 +68,6 @@ const getFileDB = () => {
   }
 };
 
-// Save database
 const saveFileDB = (data) => {
   try {
     fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2));
@@ -80,7 +76,6 @@ const saveFileDB = (data) => {
   }
 };
 
-// Connect to MongoDB
 const connectDB = async () => {
   try {
     const conn = await mongoose.connect(MONGO_URI, { serverSelectionTimeoutMS: 2000 });

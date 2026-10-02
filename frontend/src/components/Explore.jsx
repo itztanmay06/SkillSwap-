@@ -5,14 +5,12 @@ import Avatar from "../layout/Avatar";
 import { UserProfileModal } from "../layout/Modals";
 import { useApp } from "../context";
 
-// Explore Skills Catalog Component
 export default function Explore() {
   const { skills, searchQuery, setSearchQuery, setRequestModalSkill, setSelectedUserForProfile } = useApp();
   const [category, setCategory] = useState("All");
 
   const categories = ["All", "Design", "Music", "Marketing", "Programming", "Languages"];
 
-  // Filter skills by selected category and search keyword
   const filtered = skills
     .filter((s) => s.user?.name !== 'Sofia Rodriguez' && s.user?.name !== 'Tanmay Mittal' && s.title !== 'React.js & Modern Web Dev')
     .filter((s) => {
@@ -26,10 +24,10 @@ export default function Explore() {
 
   return (
     <div className="page">
-      {/* Page Header */}
+      {}
       <Header title="Explore Skills" subtitle="Discover and connect with people who can help you learn." />
 
-      {/* Category Filter Pills */}
+      {}
       <div className="filter-bar">
         <div className="category-pills">
           {categories.map((cat) => (
@@ -44,7 +42,7 @@ export default function Explore() {
         </div>
       </div>
 
-      {/* Skills Grid */}
+      {}
       {filtered.length === 0 ? (
         <div className="panel empty-box">
           <p>No skills found in this category.</p>
@@ -56,7 +54,7 @@ export default function Explore() {
         <div className="skills-grid">
           {filtered.map((skill) => (
             <div className="skill-card-box" key={skill.id}>
-              {/* Card Header (User Avatar and Category) */}
+              {}
               <div className="skill-card-header">
                 <div className="skill-user-info" onClick={() => setSelectedUserForProfile(skill.user)}>
                   <Avatar name={skill.user.name} size="sm" />
@@ -74,11 +72,11 @@ export default function Explore() {
                 </div>
               </div>
 
-              {/* Title & Description */}
+              {}
               <h3 className="skill-title">{skill.title}</h3>
               <p className="skill-desc">{skill.description}</p>
 
-              {/* Rating and Points Rate */}
+              {}
               <div className="skill-card-bottom">
                 <div className="skill-rating">
                   <Icon name="star" size={16} fill="#f59e0b" color="#f59e0b" />
@@ -87,7 +85,7 @@ export default function Explore() {
                 <span className="rate-badge">{skill.pointsPerHour} pts/hr</span>
               </div>
 
-              {/* Action Buttons */}
+              {}
               <div className="skill-actions-row">
                 <button className="btn-green" onClick={() => setRequestModalSkill(skill)}>
                   Request Exchange
@@ -101,7 +99,7 @@ export default function Explore() {
         </div>
       )}
 
-      {/* Peer Profile Modal (Scoped exclusively inside Explore Skills) */}
+      {}
       <UserProfileModal />
     </div>
   );

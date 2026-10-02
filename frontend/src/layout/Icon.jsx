@@ -18,7 +18,6 @@ import {
   Repeat
 } from 'lucide-react';
 
-// Simple Icon Helper Component
 export default function Icon({ name, size = 18, color, className, fill }) {
   const iconMap = {
     star: Star,

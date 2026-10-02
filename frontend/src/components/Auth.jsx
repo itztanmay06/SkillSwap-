@@ -22,7 +22,6 @@ export default function Auth() {
     const cleanPass = password.trim();
     const cleanSkill = skillTitle.trim() || "Web Development & Coding";
 
-    // 1. Backend API Call
     try {
       const endpoint = isLogin ? "/api/auth/login" : "/api/auth/register";
       const payload = isLogin
@@ -42,7 +41,6 @@ export default function Auth() {
       if (data.message) return setErrorMessage(data.message);
     } catch (err) {}
 
-    // 2. Offline fallback with localStorage
     const accounts = getAccounts();
     if (isLogin) {
       const userFound = accounts.find((a) => a.email === cleanEmail);

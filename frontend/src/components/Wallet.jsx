@@ -3,16 +3,15 @@ import Header from "../layout/Header";
 import Icon from "../layout/Icon";
 import { useApp } from "../context";
 
-// Skill Points Wallet and Transaction History Component
 export default function Wallet() {
   const { user, transactions, setActiveTab } = useApp();
 
   return (
     <div className="page">
-      {/* Page Header */}
+      {}
       <Header title="Skill Points Wallet" subtitle="Track your earned and spent points in the credit-based exchange economy." />
 
-      {/* Balance Summary Card */}
+      {}
       <div className="panel wallet-hero-panel">
         <div>
           <span className="wallet-label">Available Skill Points</span>
@@ -24,10 +23,10 @@ export default function Wallet() {
         </button>
       </div>
 
-      {/* Transaction Ledger History */}
+      {}
       <div className="panel" style={{ marginTop: 20 }}>
         <h3 className="section-title" style={{ marginBottom: 16 }}>Points Transaction History</h3>
-        
+
         <div className="transactions-list">
           {transactions.map((t) => (
             <div className="transaction-row" key={t.id}>

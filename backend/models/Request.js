@@ -1,10 +1,5 @@
 const mongoose = require('mongoose');
 
-/**
- * Request Schema
- * Represents skill exchange proposals sent between learners and providers.
- */
-
 const requestSchema = new mongoose.Schema({
   skillTitle: {
     type: String,

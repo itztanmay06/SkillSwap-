@@ -3,7 +3,6 @@
   min-height: 100vh;
 }
 
-/* 2. Left Sidebar */
 .sidebar-container {
   width: 250px;
   background-color: #072a1e;
@@ -119,7 +118,6 @@
   color: #f87171;
 }
 
-/* 3. Main Content & Header */
 .content-container {
   flex: 1;
   overflow-y: auto;
@@ -210,7 +208,6 @@
   border: 2px solid #16a34a;
 }
 
-/* 4. Common Panel & Typography */
 .panel {
   background-color: #ffffff;
   border: 1px solid #e2e8f0;
@@ -237,7 +234,6 @@
   margin-top: 2px;
 }
 
-/* 5. 4 Stat Cards Grid */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -300,7 +296,6 @@
 .text-blue { color: #2563eb; }
 .text-purple { color: #9333ea; }
 
-/* 6. Dashboard Two-Column Grid */
 .two-col-grid {
   display: grid;
   grid-template-columns: 1.2fr 1fr;
@@ -356,7 +351,6 @@
   justify-content: center;
 }
 
-/* 7. Promo Banner */
 .promo-banner {
   background: linear-gradient(135deg, #072a1e, #0f4d36);
   color: #ffffff;
@@ -379,7 +373,6 @@
   margin-top: 4px;
 }
 
-/* 8. Reviews Page Score & Progress Bars */
 .reviews-panel {
   display: grid;
   grid-template-columns: 240px 1fr;
@@ -486,7 +479,6 @@
   line-height: 1.4;
 }
 
-/* 9. Explore Skills Catalog */
 .filter-bar {
   margin-bottom: 22px;
 }
@@ -584,7 +576,6 @@
   gap: 8px;
 }
 
-/* 10. Requests Component */
 .tab-nav {
   display: flex;
   gap: 20px;
@@ -622,7 +613,6 @@
   border-bottom: none;
 }
 
-/* 11. Profile Component */
 .profile-card {
   padding: 24px;
 }
@@ -714,7 +704,6 @@
   width: 260px;
 }
 
-/* 12. Messages Chat Layout */
 .messages-layout {
   display: grid;
   grid-template-columns: 260px 1fr;
@@ -821,7 +810,6 @@
   outline: none;
 }
 
-/* 13. Wallet & Settings */
 .wallet-hero-panel {
   display: flex;
   align-items: center;
@@ -872,7 +860,6 @@
   border-radius: 12px;
 }
 
-/* 14. Buttons & Badges */
 .btn-green {
   background-color: #0f4d36;
   color: #ffffff;
@@ -961,7 +948,6 @@
 .text-muted { color: #64748b; }
 .text-sm { font-size: 11px; }
 
-/* 15. Login & Sign Up Page Styling */
 .auth-wrapper {
   min-height: 100vh;
   display: flex;
@@ -1061,7 +1047,6 @@
   color: #64748b;
 }
 
-/* 16. Modal Dialogs (RequestModal & Peer Profile) */
 .modal-backdrop {
   position: fixed;
   inset: 0;
@@ -1138,7 +1123,6 @@
   color: #0f172a;
 }
 
-/* Request Modal Skill Summary */
 .modal-skill-summary {
   display: flex;
   align-items: center;
@@ -1173,7 +1157,6 @@
   color: #16a34a;
 }
 
-/* Duration selector */
 .hours-selector-row {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -1206,7 +1189,6 @@
   font-weight: 700;
 }
 
-/* Points Summary Box */
 .points-summary-box {
   background: #f8fafc;
   border: 1px solid #e2e8f0;
@@ -1273,7 +1255,6 @@
   margin-top: 18px;
 }
 
-/* Peer Profile Modal Hero */
 .peer-profile-hero {
   display: flex;
   align-items: center;

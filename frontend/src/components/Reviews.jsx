@@ -10,7 +10,6 @@ export default function Reviews() {
   const totalReviews = reviews.length;
   const currentRating = totalReviews > 0 ? (user.rating || 5.0).toFixed(1) : "0.0";
 
-  // Dynamic rating breakdown based on actual reviews
   const ratingBreakdown = [
     { stars: "5 Stars", count: reviews.filter((r) => r.rating === 5).length },
     { stars: "4 Stars", count: reviews.filter((r) => r.rating === 4).length },
@@ -19,13 +18,11 @@ export default function Reviews() {
     { stars: "1 Star", count: reviews.filter((r) => r.rating === 1).length }
   ];
 
-  // Calculate percentage
   const breakdownWithPercent = ratingBreakdown.map((row) => ({
     ...row,
     percent: totalReviews > 0 ? Math.round((row.count / totalReviews) * 100) : 0
   }));
 
-  // Helper to add sample peer feedback on demand
   const handleSimulateFeedback = () => {
     addReview({
       author: "Vanshika Jindal",
@@ -36,7 +33,6 @@ export default function Reviews() {
     });
   };
 
-  // Helper to clear back to 0
   const handleResetReviews = () => {
     setReviews([]);
     setUser({ ...user, reviewCount: 0, rating: 0 });
@@ -44,7 +40,7 @@ export default function Reviews() {
 
   return (
     <div className="page">
-      {/* Top Header Bar */}
+      {}
       <Header
         title="Community Ratings & Reviews"
         subtitle="Feedback and trust ratings earned through completed skill exchanges."
@@ -56,7 +52,7 @@ export default function Reviews() {
           <p className="section-subtitle">Based on peer reviews from your skill sessions.</p>
         </div>
 
-        {/* Action button to test peer feedback */}
+        {}
         <div style={{ display: "flex", gap: "8px" }}>
           {totalReviews === 0 ? (
             <button className="btn-green-sm" onClick={handleSimulateFeedback}>
@@ -70,7 +66,7 @@ export default function Reviews() {
         </div>
       </div>
 
-      {/* Overall rating score & breakdown panel */}
+      {}
       <div className="panel reviews-panel">
         <div className="reviews-score">
           <div className="reviews-big-number">{currentRating}</div>
@@ -88,7 +84,7 @@ export default function Reviews() {
           <div className="reviews-count">Based on {totalReviews} completed exchanges</div>
         </div>
 
-        {/* Rating progress bars */}
+        {}
         <div className="reviews-bars">
           {breakdownWithPercent.map((row) => (
             <div className="rating-row" key={row.stars}>
@@ -102,7 +98,7 @@ export default function Reviews() {
         </div>
       </div>
 
-      {/* Student Feedback Comments List */}
+      {}
       <div className="panel" style={{ marginTop: 20 }}>
         <h3 className="section-title" style={{ marginBottom: 14 }}>Student Feedback</h3>
 

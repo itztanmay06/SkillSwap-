@@ -4,13 +4,11 @@ const User = require('../models/User');
 const Skill = require('../models/Skill');
 const { isMongoConnected, getFileDB, saveFileDB } = require('../db');
 
-// 1. REGISTER NEW USER (POST /api/auth/register)
 router.post('/register', async (req, res) => {
   try {
     const { name, email, password, skillTitle, category } = req.body;
     const cleanEmail = (email || '').trim().toLowerCase();
 
-    // Check if user already exists
     if (isMongoConnected()) {
       const existingUser = await User.findOne({ email: cleanEmail });
       if (existingUser) return res.status(400).json({ success: false, message: 'User already exists with this email!' });
@@ -21,7 +19,6 @@ router.post('/register', async (req, res) => {
       }
     }
 
-    // User profile object
     const skillsOffered = skillTitle ? [skillTitle.trim()] : ['Web Development'];
     const userData = {
       name: name.trim(),
@@ -43,7 +40,6 @@ router.post('/register', async (req, res) => {
       savedUser = await newUser.save();
     }
 
-    // Auto-create Skill Card for Explore Skills Tab
     const offerTitle = skillTitle ? skillTitle.trim() : 'Web Development & Problem Solving';
     const skillCategory = category || 'Programming';
     const skillCard = {
@@ -69,7 +65,6 @@ router.post('/register', async (req, res) => {
       } catch (err) {}
     }
 
-    // Always record to db.js / db.json
     const db = getFileDB();
     db.users = [userData, ...db.users.filter((u) => u.email !== cleanEmail)];
     db.skills = [skillCard, ...db.skills];
@@ -86,7 +81,6 @@ router.post('/register', async (req, res) => {
   }
 });
 
-// 2. LOGIN USER (POST /api/auth/login)
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -114,7 +108,6 @@ router.post('/login', async (req, res) => {
   }
 });
 
-// 3. GET USER PROFILE (GET /api/auth/user/:email)
 router.get('/user/:email', async (req, res) => {
   try {
     const cleanEmail = req.params.email.toLowerCase();
@@ -128,7 +121,6 @@ router.get('/user/:email', async (req, res) => {
   }
 });
 
-// 4. UPDATE USER PROFILE (PUT /api/auth/user/:email)
 router.put('/user/:email', async (req, res) => {
   try {
     const cleanEmail = req.params.email.toLowerCase();

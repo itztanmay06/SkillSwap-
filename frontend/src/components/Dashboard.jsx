@@ -4,25 +4,23 @@ import Icon from "../layout/Icon";
 import Avatar from "../layout/Avatar";
 import { useApp } from "../context";
 
-// Main Dashboard Overview Component
 export default function Dashboard() {
   const { user, skills, requests, activities, setActiveTab, setSelectedUserForProfile } = useApp();
   const recommended = skills.slice(0, 3);
-  
-  // Calculate active requests dynamically from requests list or user state
+
   const activeCount = requests && requests.length > 0
     ? requests.filter((r) => r.status === 'pending' || !r.status).length
     : (user.activeRequests ?? 0);
 
   return (
     <div className="page">
-      {/* Top Header */}
+      {}
       <Header title={"Welcome back, " + user.name.split(" ")[0] + "!"} subtitle="Let's exchange skills and grow together." />
 
-      {/* Key Metric Stat Cards Grid */}
+      {}
       <div className="stats-grid">
-        
-        {/* Card 1: Skill Points */}
+
+        {}
         <div className="stat-card green" onClick={() => setActiveTab("points")}>
           <div className="stat-icon-circle green">
             <Icon name="star" size={22} fill="#f59e0b" color="#f59e0b" />
@@ -34,7 +32,7 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Card 2: Active Requests */}
+        {}
         <div className="stat-card amber" onClick={() => setActiveTab("requests")}>
           <div className="stat-icon-circle amber">
             <Icon name="clipboard" size={22} color="#d97706" />
@@ -46,7 +44,7 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Card 3: Completed Exchanges */}
+        {}
         <div className="stat-card blue" onClick={() => setActiveTab("requests")}>
           <div className="stat-icon-circle blue">
             <Icon name="check" size={22} color="#2563eb" />
@@ -58,7 +56,7 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Card 4: My Rating */}
+        {}
         <div className="stat-card purple" onClick={() => setActiveTab("reviews")}>
           <div className="stat-icon-circle purple">
             <Icon name="award" size={22} color="#9333ea" />
@@ -72,10 +70,10 @@ export default function Dashboard() {
 
       </div>
 
-      {/* Two Column Grid: Recommendations & Activity */}
+      {}
       <div className="two-col-grid">
-        
-        {/* Left Box: Recommended Skills */}
+
+        {}
         <div className="panel">
           <div className="section-top">
             <h3 className="section-title">Recommended Skills for You</h3>
@@ -106,7 +104,7 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Right Box: Recent Activity */}
+        {}
         <div className="panel">
           <div className="section-top">
             <h3 className="section-title">Recent Activity</h3>
@@ -130,7 +128,7 @@ export default function Dashboard() {
 
       </div>
 
-      {/* Community Call-to-Action Banner */}
+      {}
       <div className="promo-banner">
         <div>
           <h3>Share your skills. Earn points. Learn new skills.</h3>

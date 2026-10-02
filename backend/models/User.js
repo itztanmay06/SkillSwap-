@@ -1,10 +1,5 @@
 const mongoose = require('mongoose');
 
-/**
- * User Schema
- * Represents user credentials, profile information, and wallet point balance.
- */
-
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -36,7 +31,7 @@ const userSchema = new mongoose.Schema({
   },
   points: {
     type: Number,
-    default: 200 // Initial signup bonus points
+    default: 200 
   },
   rating: {
     type: Number,

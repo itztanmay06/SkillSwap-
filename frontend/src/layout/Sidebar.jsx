@@ -2,14 +2,11 @@ import React from "react";
 import Icon from "./Icon";
 import { useApp } from "../context";
 
-// Sidebar Navigation Component
 export default function Sidebar() {
   const { activeTab, setActiveTab, requests, logout } = useApp();
 
-  // Count incoming pending requests
   const pendingCount = requests.filter((r) => !r.to).length;
 
-  // Sidebar navigation configuration
   const menu = [
     { id: "dashboard", label: "Dashboard", icon: "clipboard" },
     { id: "explore", label: "Explore Skills", icon: "compass" },
@@ -22,7 +19,7 @@ export default function Sidebar() {
 
   return (
     <aside className="sidebar-container">
-      {/* Brand Logo & Name */}
+      {}
       <div className="brand-box" onClick={() => setActiveTab("dashboard")}>
         <div className="brand-logo-icon">
           <Icon name="logo" size={20} color="#16a34a" />
@@ -33,7 +30,7 @@ export default function Sidebar() {
         </div>
       </div>
 
-      {/* Navigation List */}
+      {}
       <nav className="nav-list">
         {menu.map((item) => (
           <button
@@ -45,13 +42,13 @@ export default function Sidebar() {
               <Icon name={item.icon} size={18} />
               <span>{item.label}</span>
             </div>
-            {/* Pending count badge */}
+            {}
             {item.count > 0 && <span className="nav-badge">{item.count}</span>}
           </button>
         ))}
       </nav>
 
-      {/* Logout Action */}
+      {}
       <div className="sidebar-bottom">
         <button className="logout-button" onClick={logout}>
           <Icon name="logout" size={16} />

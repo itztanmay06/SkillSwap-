@@ -3,7 +3,6 @@ const router = express.Router();
 const Transaction = require('../models/Transaction');
 const User = require('../models/User');
 
-// 1. GET ALL TRANSACTIONS FOR USER (GET /api/wallet/transactions/:email)
 router.get('/transactions/:email', async (req, res) => {
   try {
     const transactions = await Transaction.find({ userEmail: req.params.email }).sort({ createdAt: -1 });
@@ -13,7 +12,6 @@ router.get('/transactions/:email', async (req, res) => {
   }
 });
 
-// 2. RECHARGE / ADD POINTS (POST /api/wallet/add-points)
 router.post('/add-points', async (req, res) => {
   try {
     const { email, points, title } = req.body;

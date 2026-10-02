@@ -111,7 +111,7 @@ export default function Profile() {
         </div>
       </div>
 
-      {/* Teaching Skills */}
+      {}
       <div className="panel" style={{ marginTop: 20 }}>
         <h3 className="section-title">Skills Offered (What you teach)</h3>
         <div className="tags-row" style={{ margin: "10px 0" }}>
@@ -127,7 +127,7 @@ export default function Profile() {
         </form>
       </div>
 
-      {/* Wishlist Skills */}
+      {}
       <div className="panel" style={{ marginTop: 20 }}>
         <h3 className="section-title">Skills Wanted (What you want to learn)</h3>
         <div className="tags-row" style={{ margin: "10px 0" }}>

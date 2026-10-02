@@ -1,9 +1,8 @@
 import React from 'react';
 
-// Get avatar background color based on name
 function getAvatarGradient(name = '') {
   const trimmed = name.trim();
-  // Assign avatar colors for team members
+
   if (trimmed === 'Vanshika Jindal') {
     return 'linear-gradient(135deg, #ec4899, #be185d)';
   }
@@ -15,16 +14,16 @@ function getAvatarGradient(name = '') {
   }
 
   const gradients = [
-    'linear-gradient(135deg, #10b981, #059669)', // Emerald
-    'linear-gradient(135deg, #6366f1, #4f46e5)', // Indigo
-    'linear-gradient(135deg, #3b82f6, #1d4ed8)', // Blue
-    'linear-gradient(135deg, #8b5cf6, #6d28d9)', // Purple
-    'linear-gradient(135deg, #f59e0b, #b45309)', // Amber
-    'linear-gradient(135deg, #ec4899, #be185d)', // Pink
-    'linear-gradient(135deg, #14b8a6, #0f766e)', // Teal
-    'linear-gradient(135deg, #f97316, #c2410c)', // Orange
-    'linear-gradient(135deg, #0ea5e9, #0369a1)', // Sky Blue
-    'linear-gradient(135deg, #a855f7, #7e22ce)'  // Violet
+    'linear-gradient(135deg, #10b981, #059669)', 
+    'linear-gradient(135deg, #6366f1, #4f46e5)', 
+    'linear-gradient(135deg, #3b82f6, #1d4ed8)', 
+    'linear-gradient(135deg, #8b5cf6, #6d28d9)', 
+    'linear-gradient(135deg, #f59e0b, #b45309)', 
+    'linear-gradient(135deg, #ec4899, #be185d)', 
+    'linear-gradient(135deg, #14b8a6, #0f766e)', 
+    'linear-gradient(135deg, #f97316, #c2410c)', 
+    'linear-gradient(135deg, #0ea5e9, #0369a1)', 
+    'linear-gradient(135deg, #a855f7, #7e22ce)'  
   ];
 
   let hash = 0;
@@ -35,13 +34,11 @@ function getAvatarGradient(name = '') {
   return gradients[index];
 }
 
-// Letter initial avatar generator
 export default function Avatar({ name = 'User', size = 'sm', className = '', onClick, style = {} }) {
-  // Extract first letter
+
   const initial = (name ? name.trim().charAt(0) : '?').toUpperCase();
   const background = getAvatarGradient(name);
 
-  // Predefined avatar dimensions
   const sizeMap = {
     sm: { width: '34px', height: '34px', fontSize: '14px', borderRadius: '8px' },
     header: { width: '38px', height: '38px', fontSize: '16px', borderRadius: '10px' },

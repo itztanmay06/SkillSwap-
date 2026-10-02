@@ -3,14 +3,12 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 const AppContext = createContext();
 const API_URL = 'http://localhost:5000/api';
 
-// Initial fallback skills catalog (Peer skills in marketplace)
 const defaultSkills = [
   { id: 's-2', title: 'UI/UX Design in Figma', category: 'Design', description: 'Master wireframing, color psychology, typography, and interactive prototyping.', pointsPerHour: 40, rating: 4.9, reviewsCount: 15, user: { name: 'Vanshika Sharma', location: 'Mumbai, India' } },
   { id: 's-3', title: 'Acoustic Guitar Basics', category: 'Music', description: 'Beginner chords, strumming patterns, and rhythm training.', pointsPerHour: 35, rating: 4.8, reviewsCount: 9, user: { name: 'Vanshika Jindal', location: 'Bangalore, India' } },
   { id: 's-4', title: 'SEO & Growth Marketing', category: 'Marketing', description: 'Keyword research, on-page optimization, and organic growth tracking.', pointsPerHour: 45, rating: 4.7, reviewsCount: 11, user: { name: 'Tanmay', location: 'Pune, India' } }
 ];
 
-// Initial default user profile
 const defaultUser = {
   id: 'u1', name: 'Tanmay Mittal', email: 'tanmay@example.com',
   title: 'Full Stack MERN Developer & Student', location: 'Delhi, India',
@@ -28,7 +26,7 @@ export function AppProvider({ children }) {
       if (!parsed.email) parsed.email = 'tanmay@example.com';
       parsed.reviewCount = 0;
       parsed.rating = 0;
-      // Default points balance
+
       if (parsed.points === undefined || parsed.points === null || parsed.points === 160) parsed.points = 200;
       if (parsed.activeRequests === undefined || parsed.activeRequests === null) parsed.activeRequests = 0;
       if (parsed.completed === undefined || parsed.completed === null) parsed.completed = 0;
@@ -77,17 +75,14 @@ export function AppProvider({ children }) {
     name: 'Vanshika Sharma', role: 'UI/UX Designer', avatar: '', online: true
   });
 
-  // Sync user state with localStorage
   useEffect(() => {
     localStorage.setItem('skillswap_user', JSON.stringify(user));
   }, [user]);
 
-  // Sync requests state with localStorage
   useEffect(() => {
     localStorage.setItem('skillswap_requests', JSON.stringify(requests));
   }, [requests]);
 
-  // Fetch live skills from backend API
   useEffect(() => {
     fetch(`${API_URL}/skills`)
       .then((res) => res.json())
@@ -115,7 +110,6 @@ export function AppProvider({ children }) {
 
   const logout = () => setIsLoggedIn(false);
 
-  // Add skill card and sync with backend
   const addSkill = (newSkillData) => {
     const card = {
       id: newSkillData.id || 's-' + Date.now(),
@@ -163,7 +157,6 @@ export function AppProvider({ children }) {
     return newRev;
   };
 
-  // Submit skill exchange request with point escrow deduction
   const sendRequest = (skill, hours, note) => {
     const cost = skill.pointsPerHour * hours;
     if (user.points < cost) return alert(`Not enough Skill Points! You need ${cost} points.`);
@@ -187,7 +180,6 @@ export function AppProvider({ children }) {
     alert(`Request sent! ${cost} points reserved.`);
   };
 
-  // Accept exchange request and credit points to provider
   const acceptRequest = (requestId) => {
     const req = requests.find((r) => r.id === requestId);
     if (!req) return;
@@ -202,7 +194,6 @@ export function AppProvider({ children }) {
     alert(`Request accepted! +${req.points} points credited.`);
   };
 
-  // Reject exchange request and refund points
   const rejectRequest = (requestId) => {
     setRequests(requests.filter((r) => r.id !== requestId));
     setUser({ ...user, activeRequests: Math.max(0, user.activeRequests - 1) });

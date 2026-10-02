@@ -1,10 +1,5 @@
 const mongoose = require('mongoose');
 
-/**
- * Transaction Schema
- * Represents wallet credits and debits for SkillSwap user accounts.
- */
-
 const transactionSchema = new mongoose.Schema({
   userEmail: {
     type: String,

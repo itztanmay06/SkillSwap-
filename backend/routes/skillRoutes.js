@@ -3,7 +3,6 @@ const router = express.Router();
 const Skill = require('../models/Skill');
 const { isMongoConnected, getFileDB, saveFileDB } = require('../db');
 
-// 1. GET ALL SKILLS (GET /api/skills)
 router.get('/', async (req, res) => {
   try {
     const { category, search } = req.query;
@@ -21,7 +20,6 @@ router.get('/', async (req, res) => {
       skills = await Skill.find(query).sort({ createdAt: -1 });
     }
 
-    // Fallback or read from db.json
     if (!skills || skills.length === 0) {
       skills = getFileDB().skills || [];
       if (category && category !== 'All') {
@@ -44,7 +42,6 @@ router.get('/', async (req, res) => {
   }
 });
 
-// 2. ADD NEW SKILL (POST /api/skills)
 router.post('/', async (req, res) => {
   try {
     const { title, category, description, pointsPerHour, availability, user } = req.body;
@@ -74,7 +71,6 @@ router.post('/', async (req, res) => {
       } catch (e) {}
     }
 
-    // Always record to db.js / db.json
     const db = getFileDB();
     db.skills = [skillData, ...db.skills];
     saveFileDB(db);
@@ -85,7 +81,6 @@ router.post('/', async (req, res) => {
   }
 });
 
-// 3. GET SINGLE SKILL (GET /api/skills/:id)
 router.get('/:id', async (req, res) => {
   try {
     let skill = null;

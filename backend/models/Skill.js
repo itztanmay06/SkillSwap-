@@ -1,10 +1,5 @@
 const mongoose = require('mongoose');
 
-/**
- * Skill Schema
- * Represents skill offerings listed by platform users.
- */
-
 const skillSchema = new mongoose.Schema({
   title: {
     type: String,
