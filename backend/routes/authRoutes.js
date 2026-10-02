@@ -32,7 +32,7 @@ router.post('/register', async (req, res) => {
       skillsWanted: [],
       title: `${name.trim()} • Skill Explorer`,
       location: 'India',
-      rating: 5.0,
+      rating: 0.0,
       reviewCount: 0,
       joinedDate: 'Sept 2026'
     };

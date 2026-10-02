@@ -1,8 +1,8 @@
 {
   "users": [
     {
-      "id": "u-1",
-      "name": "Tanmay Mittal",
+      "id": "u1",
+      "name": "Developer",
       "email": "tanmay@example.com",
       "password": "123",
       "title": "Full Stack MERN Developer & Student",
@@ -14,24 +14,15 @@
       "skillsWanted": [
         "UI/UX Design in Figma"
       ],
-      "rating": 5,
-      "joinedDate": "Sept 2026"
+      "rating": 0,
+      "joinedDate": "Sept 2026",
+      "activeRequests": 0,
+      "completed": 0,
+      "reviewCount": 0,
+      "bio": "Passionate about building scalable web applications and exchanging knowledge in React, Node, and DSA."
     }
   ],
   "skills": [
-    {
-      "id": "s-1",
-      "title": "React.js & Modern Web Dev",
-      "category": "Programming",
-      "description": "Learn modern React hooks, component architecture, state management, and Vite build setups.",
-      "pointsPerHour": 50,
-      "rating": 5,
-      "reviewsCount": 12,
-      "user": {
-        "name": "Tanmay Mittal",
-        "location": "Delhi, India"
-      }
-    },
     {
       "id": "s-2",
       "title": "UI/UX Design in Figma",
@@ -67,21 +58,8 @@
       "rating": 4.7,
       "reviewsCount": 11,
       "user": {
-        "name": "Ayush Kumar",
+        "name": "Tanmay",
         "location": "Pune, India"
-      }
-    },
-    {
-      "id": "s-5",
-      "title": "Conversational Spanish",
-      "category": "Languages",
-      "description": "Pronunciation, daily vocabulary, grammar essentials, and real conversational practice.",
-      "pointsPerHour": 30,
-      "rating": 4.9,
-      "reviewsCount": 16,
-      "user": {
-        "name": "Sofia Rodriguez",
-        "location": "Madrid, Spain"
       }
     }
   ],

@@ -28,11 +28,11 @@ export default function Reviews() {
   // Helper to add sample peer feedback on demand
   const handleSimulateFeedback = () => {
     addReview({
-      author: "Vanshika Sharma",
+      author: "Vanshika Jindal",
       rating: 5,
-      skill: "UI/UX Design in Figma",
+      skill: "Acoustic Guitar & Music",
       date: "Just now",
-      comment: "Tanmay explained React hooks and API integration with extreme patience and clarity. 10/10 peer tutor!"
+      comment: "Tanmay explained web concepts and state flow brilliantly. Great learning partner and fast responder!"
     });
   };
 

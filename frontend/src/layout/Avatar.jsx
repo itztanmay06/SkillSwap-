@@ -2,8 +2,20 @@ import React from 'react';
 
 // Computes a deterministic gradient based on user name string
 function getAvatarGradient(name = '') {
+  const trimmed = name.trim();
+  // Ensure Tanmay, Vanshika Sharma, and Vanshika Jindal each have a distinctly different color
+  if (trimmed === 'Vanshika Jindal') {
+    return 'linear-gradient(135deg, #ec4899, #be185d)'; // Vibrant Rose / Pink
+  }
+  if (trimmed === 'Vanshika Sharma') {
+    return 'linear-gradient(135deg, #6366f1, #4f46e5)'; // Indigo
+  }
+  if (trimmed === 'Tanmay' || trimmed === 'Tanmay Mittal') {
+    return 'linear-gradient(135deg, #10b981, #059669)'; // Emerald Green (Brand)
+  }
+
   const gradients = [
-    'linear-gradient(135deg, #10b981, #059669)', // Emerald (Brand color)
+    'linear-gradient(135deg, #10b981, #059669)', // Emerald
     'linear-gradient(135deg, #6366f1, #4f46e5)', // Indigo
     'linear-gradient(135deg, #3b82f6, #1d4ed8)', // Blue
     'linear-gradient(135deg, #8b5cf6, #6d28d9)', // Purple

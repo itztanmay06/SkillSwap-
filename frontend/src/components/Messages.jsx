@@ -22,7 +22,7 @@ const initialContacts = [
   },
   {
     id: "c-ayush",
-    name: "Ayush Kumar",
+    name: "Tanmay",
     role: "SEO & Growth Marketing",
     online: true,
     initialMessage: "Hello! Let me know when you want to look at SEO strategies."

@@ -12,15 +12,17 @@ export default function Explore() {
 
   const categories = ["All", "Design", "Music", "Marketing", "Programming", "Languages"];
 
-  // Filter skills by selected category and search keyword
-  const filtered = skills.filter((s) => {
-    const matchCat = category === "All" || s.category.toLowerCase() === category.toLowerCase();
-    const search = searchQuery.toLowerCase();
-    const matchSearch = s.title.toLowerCase().includes(search) || 
-                        s.description.toLowerCase().includes(search) || 
-                        s.user.name.toLowerCase().includes(search);
-    return matchCat && matchSearch;
-  });
+  // Filter skills by selected category and search keyword (excluding Sofia Rodriguez and Tanmay Mittal)
+  const filtered = skills
+    .filter((s) => s.user?.name !== 'Sofia Rodriguez' && s.user?.name !== 'Tanmay Mittal' && s.title !== 'React.js & Modern Web Dev')
+    .filter((s) => {
+      const matchCat = category === "All" || s.category.toLowerCase() === category.toLowerCase();
+      const search = searchQuery.toLowerCase();
+      const matchSearch = s.title.toLowerCase().includes(search) || 
+                          s.description.toLowerCase().includes(search) || 
+                          (s.user?.name && s.user.name.toLowerCase().includes(search));
+      return matchCat && matchSearch;
+    });
 
   return (
     <div className="page">

@@ -3,13 +3,11 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 const AppContext = createContext();
 const API_URL = 'http://localhost:5000/api';
 
-// Initial fallback skills catalog
+// Initial fallback skills catalog (Peer skills in marketplace)
 const defaultSkills = [
-  { id: 's-1', title: 'React.js & Modern Web Dev', category: 'Programming', description: 'Learn modern React hooks, state management, and Vite build setups.', pointsPerHour: 50, rating: 5.0, reviewsCount: 12, user: { name: 'Tanmay Mittal', location: 'Delhi, India' } },
   { id: 's-2', title: 'UI/UX Design in Figma', category: 'Design', description: 'Master wireframing, color psychology, typography, and interactive prototyping.', pointsPerHour: 40, rating: 4.9, reviewsCount: 15, user: { name: 'Vanshika Sharma', location: 'Mumbai, India' } },
   { id: 's-3', title: 'Acoustic Guitar Basics', category: 'Music', description: 'Beginner chords, strumming patterns, and rhythm training.', pointsPerHour: 35, rating: 4.8, reviewsCount: 9, user: { name: 'Vanshika Jindal', location: 'Bangalore, India' } },
-  { id: 's-4', title: 'SEO & Growth Marketing', category: 'Marketing', description: 'Keyword research, on-page optimization, and organic growth tracking.', pointsPerHour: 45, rating: 4.7, reviewsCount: 11, user: { name: 'Ayush Kumar', location: 'Pune, India' } },
-  { id: 's-5', title: 'Conversational Spanish', category: 'Languages', description: 'Pronunciation, daily vocabulary, and real conversational practice.', pointsPerHour: 30, rating: 4.9, reviewsCount: 16, user: { name: 'Sofia Rodriguez', location: 'Madrid, Spain' } }
+  { id: 's-4', title: 'SEO & Growth Marketing', category: 'Marketing', description: 'Keyword research, on-page optimization, and organic growth tracking.', pointsPerHour: 45, rating: 4.7, reviewsCount: 11, user: { name: 'Tanmay', location: 'Pune, India' } }
 ];
 
 // Initial default user profile
@@ -30,6 +28,10 @@ export function AppProvider({ children }) {
       if (!parsed.email) parsed.email = 'tanmay@example.com';
       parsed.reviewCount = 0;
       parsed.rating = 0;
+      // Ensure points default to 200 (resets stale cached 160 or undefined)
+      if (parsed.points === undefined || parsed.points === null || parsed.points === 160) parsed.points = 200;
+      if (parsed.activeRequests === undefined || parsed.activeRequests === null) parsed.activeRequests = 0;
+      if (parsed.completed === undefined || parsed.completed === null) parsed.completed = 0;
       if (!parsed.joinedDate || parsed.joinedDate === 'January 2026') parsed.joinedDate = 'Sept 2026';
       return parsed;
     }
@@ -39,14 +41,36 @@ export function AppProvider({ children }) {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [searchQuery, setSearchQuery] = useState('');
   const [skills, setSkills] = useState(defaultSkills);
-  const [requests, setRequests] = useState([]);
+  const [requests, setRequests] = useState(() => {
+    const savedReqs = localStorage.getItem('skillswap_requests');
+    if (savedReqs) {
+      try {
+        const parsed = JSON.parse(savedReqs);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          return parsed.map((r) => (r.to === 'Vanshika Sharma' ? { ...r, to: 'Vanshika Jindal', skill: 'Acoustic Guitar Basics' } : r));
+        }
+      } catch (e) {}
+    }
+    return [
+      { id: 'req-1', skill: 'Acoustic Guitar Basics', to: 'Vanshika Jindal', points: 35, hours: 1, status: 'pending', date: 'Today' }
+    ];
+  });
   const [activities, setActivities] = useState([
     { id: 'act-1', type: 'earned', title: 'You earned 200 points', subtitle: 'Default login coins credited to your wallet', time: 'Just now' }
   ]);
   const [transactions, setTransactions] = useState([
     { id: 't-1', type: 'credit', title: 'Default Login Coins Credited', points: '+200', date: 'Just now' }
   ]);
-  const [reviews, setReviews] = useState([]);
+  const [reviews, setReviews] = useState(() => [
+    {
+      id: 'rev-vj-2',
+      author: 'Vanshika Sharma',
+      rating: 5,
+      skill: 'Acoustic Guitar Basics',
+      date: '3 days ago',
+      comment: 'Super fun lesson with Vanshika Jindal! Simplified difficult barre chords into easy beginner grips. Highly recommended!'
+    }
+  ]);
   const [requestModalSkill, setRequestModalSkill] = useState(null);
   const [selectedUserForProfile, setSelectedUserForProfile] = useState(null);
   const [activeChatUser, setActiveChatUser] = useState({
@@ -58,13 +82,21 @@ export function AppProvider({ children }) {
     localStorage.setItem('skillswap_user', JSON.stringify(user));
   }, [user]);
 
-  // Fetch live skills from backend API
+  // Sync requests state with localStorage
+  useEffect(() => {
+    localStorage.setItem('skillswap_requests', JSON.stringify(requests));
+  }, [requests]);
+
+  // Fetch live skills from backend API (filter out Sofia Rodriguez and Tanmay Mittal)
   useEffect(() => {
     fetch(`${API_URL}/skills`)
       .then((res) => res.json())
       .then((data) => {
         if (data.success && data.skills?.length > 0) {
-          setSkills(data.skills.map((s) => ({ ...s, id: s._id || s.id })));
+          const filteredLive = data.skills
+            .filter((s) => s.user?.name !== 'Sofia Rodriguez' && s.user?.name !== 'Tanmay Mittal' && s.title !== 'React.js & Modern Web Dev')
+            .map((s) => ({ ...s, id: s._id || s.id }));
+          if (filteredLive.length > 0) setSkills(filteredLive);
         }
       })
       .catch(() => {});

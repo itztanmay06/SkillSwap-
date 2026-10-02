@@ -6,8 +6,13 @@ import { useApp } from "../context";
 
 // Main Dashboard Overview Component
 export default function Dashboard() {
-  const { user, skills, activities, setActiveTab, setSelectedUserForProfile } = useApp();
+  const { user, skills, requests, activities, setActiveTab, setSelectedUserForProfile } = useApp();
   const recommended = skills.slice(0, 3);
+  
+  // Calculate active requests dynamically from requests list or user state
+  const activeCount = requests && requests.length > 0
+    ? requests.filter((r) => r.status === 'pending' || !r.status).length
+    : (user.activeRequests ?? 0);
 
   return (
     <div className="page">
@@ -24,7 +29,7 @@ export default function Dashboard() {
           </div>
           <div>
             <div className="stat-label">Skill Points</div>
-            <div className="stat-value">{user.points}</div>
+            <div className="stat-value">{user.points ?? 200}</div>
             <div className="stat-subtext">Available Balance</div>
           </div>
         </div>
@@ -36,7 +41,7 @@ export default function Dashboard() {
           </div>
           <div>
             <div className="stat-label">Active Requests</div>
-            <div className="stat-value">{user.activeRequests}</div>
+            <div className="stat-value">{activeCount}</div>
             <div className="stat-subtext text-amber">View all →</div>
           </div>
         </div>
@@ -60,7 +65,7 @@ export default function Dashboard() {
           </div>
           <div>
             <div className="stat-label">My Rating</div>
-            <div className="stat-value">{user.rating || "5.0"}</div>
+            <div className="stat-value">{user.reviewCount > 0 ? (Number(user.rating) || 0).toFixed(1) : (user.rating !== undefined && user.rating !== null ? Number(user.rating).toFixed(1) : "0.0")}</div>
             <div className="stat-subtext text-purple">View reviews →</div>
           </div>
         </div>

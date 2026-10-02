@@ -18,21 +18,11 @@ const initialData = {
       points: 200,
       skillsOffered: ['React.js & Modern Web Dev'],
       skillsWanted: ['UI/UX Design in Figma'],
-      rating: 5.0,
+      rating: 0.0,
       joinedDate: 'Sept 2026'
     }
   ],
   skills: [
-    {
-      id: 's-1',
-      title: 'React.js & Modern Web Dev',
-      category: 'Programming',
-      description: 'Learn modern React hooks, component architecture, state management, and Vite build setups.',
-      pointsPerHour: 50,
-      rating: 5.0,
-      reviewsCount: 12,
-      user: { name: 'Tanmay Mittal', location: 'Delhi, India' }
-    },
     {
       id: 's-2',
       title: 'UI/UX Design in Figma',
@@ -61,17 +51,7 @@ const initialData = {
       pointsPerHour: 45,
       rating: 4.7,
       reviewsCount: 11,
-      user: { name: 'Ayush Kumar', location: 'Pune, India' }
-    },
-    {
-      id: 's-5',
-      title: 'Conversational Spanish',
-      category: 'Languages',
-      description: 'Pronunciation, daily vocabulary, grammar essentials, and real conversational practice.',
-      pointsPerHour: 30,
-      rating: 4.9,
-      reviewsCount: 16,
-      user: { name: 'Sofia Rodriguez', location: 'Madrid, Spain' }
+      user: { name: 'Tanmay', location: 'Pune, India' }
     }
   ],
   requests: []
